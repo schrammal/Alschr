@@ -1,485 +1,341 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Al Schramm — operations and people leader who ships software. A decade in high-volume logistics, plus dashboards, AI tools, and self-hosted systems built on the side.">
 <title>Al Schramm — Operations Leader & Builder</title>
-<meta name="description" content="Al Schramm, PHR — Operations & People Leader who ships software. A decade of high-volume logistics leadership at Amazon, Walmart & FedEx, plus dashboards and AI tools built on the side."/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<!-- System font fallback if Google Fonts is blocked on the corp network. -->
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600;1,9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0b0b0f;--bg2:#0f0f15;--panel:#15151d;
-  --text:#f6f6f8;--mut:#9a9aa6;--mut2:#60606d;
-  --accent:#a6b1ff;--accent2:#c8b6ff;
-  --glass:rgba(255,255,255,.03);--line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.12);
-  --grad:linear-gradient(115deg,#8ea2ff,#b69cff 55%,#d9c5ff);
-  --display:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-  --ease:cubic-bezier(.2,.8,.2,1);
+  --paper:#F6F2E9;--paper2:#EFE9DC;--paper3:#E7DFCD;
+  --ink:#1C1A16;--ink2:#3A362E;--mut:#615A4D;
+  --rust:#A93A1F;--rust2:#7E2E16;--gold:#9A7B40;--line:#D8CFBC;--line2:#C9BFA8;
+  --disp:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
+  --maxw:1040px;
 }
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-@media(pointer:fine){html,body{cursor:none}}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;letter-spacing:-.005em}
-
-/* scroll progress */
-#progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--grad);z-index:200;transition:width .1s linear}
-
-/* custom cursor */
-#cur{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--accent2);z-index:9999;pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .25s,height .25s}
-#ring{position:fixed;width:32px;height:32px;border:1px solid rgba(166,177,255,.45);border-radius:50%;z-index:9998;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s}
-body.hovering #cur{width:14px;height:14px}
-body.hovering #ring{width:52px;height:52px;border-color:var(--accent2)}
-@media(pointer:coarse){#cur,#ring{display:none}}
-
-/* ambient: sitewide soft spotlight + slow drifting orbs */
-#spot{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,12%),rgba(166,177,255,.05),transparent 70%);transition:background .2s}
-.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none}
-.orb.a{width:540px;height:540px;background:radial-gradient(circle,rgba(142,162,255,.28),transparent 70%);top:-12%;left:-8%;animation:drift1 22s var(--ease) infinite alternate}
-.orb.b{width:460px;height:460px;background:radial-gradient(circle,rgba(200,182,255,.22),transparent 70%);bottom:-10%;right:-6%;animation:drift2 26s var(--ease) infinite alternate}
-@keyframes drift1{to{transform:translate(60px,40px) scale(1.1)}}
-@keyframes drift2{to{transform:translate(-50px,-40px) scale(1.08)}}
-
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.8rem;position:relative;z-index:2}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(11,11,15,.6);backdrop-filter:blur(20px) saturate(160%);border-bottom:1px solid var(--line)}
-.logo{font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:0}
-.logo .dot{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.nlinks{display:flex;gap:2.1rem;list-style:none}
-.nlinks a{color:var(--mut);font-size:.85rem;font-weight:500;transition:color .2s}
-.nlinks a:hover{color:var(--text)}
-.ncta{font-size:.82rem;font-weight:500;color:var(--bg);background:var(--text);padding:.5rem 1.1rem;border-radius:100px;transition:all .25s}
-.ncta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,255,255,.14)}
-@media(max-width:760px){.nlinks{display:none}}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 1.8rem 6rem;position:relative}
-.hin{position:relative;z-index:3;max-width:880px}
-.tagpill{display:inline-flex;align-items:center;gap:.6rem;font-size:.78rem;font-weight:500;letter-spacing:.01em;color:var(--accent2);background:rgba(166,177,255,.07);border:1px solid rgba(166,177,255,.18);border-radius:100px;padding:.45rem 1.15rem;margin-bottom:2.6rem;opacity:0;animation:up 1s var(--ease) .05s forwards}
-.tagpill .lv{width:6px;height:6px;border-radius:50%;background:var(--accent2);box-shadow:0 0 12px var(--accent2);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.hname{font-family:var(--display);font-weight:600;font-size:clamp(3.6rem,12vw,8.5rem);line-height:.92;letter-spacing:-.04em;opacity:0;animation:up 1.1s var(--ease) .15s forwards}
-.hname .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hrole{font-size:clamp(.95rem,2vw,1.25rem);color:var(--mut);margin-top:1.7rem;height:1.6em;font-weight:400;opacity:0;animation:up 1.1s var(--ease) .3s forwards}
-.hrole .tw{color:var(--text)}
-.hrole .car{color:var(--accent);animation:blink 1.1s step-end infinite;font-weight:300}
-@keyframes blink{50%{opacity:0}}
-.hsub{max-width:580px;margin:1.7rem auto 0;color:var(--mut);font-size:1.08rem;font-weight:300;opacity:0;animation:up 1.1s var(--ease) .42s forwards}
-.hsub b{color:var(--text);font-weight:500}
-.hacts{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:2.8rem;opacity:0;animation:up 1.1s var(--ease) .54s forwards}
-.btn{display:inline-flex;align-items:center;gap:.55rem;font-size:.92rem;font-weight:500;padding:.92rem 2rem;border-radius:100px;transition:all .28s var(--ease);border:1px solid transparent}
-.bp{background:var(--text);color:var(--bg)}
-.bp:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(255,255,255,.16)}
-.bg{background:transparent;color:var(--text);border-color:var(--line2)}
-.bg:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
-.hstats{display:flex;gap:3.4rem;flex-wrap:wrap;justify-content:center;margin-top:4.2rem;opacity:0;animation:up 1.1s var(--ease) .66s forwards}
-.st{text-align:center}
-.st-n{font-family:var(--display);font-weight:600;font-size:2.5rem;line-height:1;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.st-l{font-size:.72rem;letter-spacing:.04em;color:var(--mut2);margin-top:.6rem;font-weight:500}
-.shint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.1em;color:var(--mut2);display:flex;flex-direction:column;align-items:center;gap:.6rem;opacity:0;animation:fade 1.4s ease 1.2s forwards}
-.sbar{width:1px;height:44px;background:linear-gradient(var(--accent),transparent);animation:drop 2.2s ease-in-out infinite}
-@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-/* SECTIONS */
-section{padding:8rem 0;position:relative}
-.eye{font-size:.78rem;letter-spacing:.02em;color:var(--accent);margin-bottom:1.1rem;font-weight:500;display:flex;align-items:center;gap:.7rem}
-.eye::before{content:"";width:24px;height:1px;background:var(--accent);opacity:.6}
-.h2{font-family:var(--display);font-weight:600;font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:1.2rem}
-.h2 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.lede{color:var(--mut);font-size:1.08rem;font-weight:300;max-width:640px}
-
-/* ABOUT */
-.about{background:linear-gradient(180deg,var(--bg),var(--bg2))}
-.agrid{display:grid;grid-template-columns:1.35fr 1fr;gap:4rem;align-items:center}
-@media(max-width:820px){.agrid{grid-template-columns:1fr;gap:2.5rem}}
-.ap{color:var(--mut);font-size:1.08rem;font-weight:300;margin-bottom:1.2rem}
-.ap b{color:var(--text);font-weight:500}
-
-/* elegant snapshot card */
-.snap{position:relative;overflow:hidden;background:var(--glass);border:1px solid var(--line);border-radius:24px;padding:2.4rem;backdrop-filter:blur(8px)}
-.snap-top{display:flex;align-items:center;gap:1.1rem;margin-bottom:1.8rem;position:relative;z-index:1}
-.mono-ring{width:62px;height:62px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:var(--bg);position:relative}
-.mono-ring::before{content:"";position:absolute;inset:-2px;border-radius:50%;background:var(--grad);z-index:-1}
-.mono-ring span{font-family:var(--display);font-weight:600;font-size:1.4rem}
-.snap-name{font-family:var(--display);font-weight:600;font-size:1.2rem}
-.snap-role{color:var(--mut);font-size:.88rem;font-weight:300}
-.snap-rows{display:flex;flex-direction:column;gap:.95rem;position:relative;z-index:1}
-.snap-row{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;padding-bottom:.95rem;border-bottom:1px solid var(--line)}
-.snap-row:last-child{border-bottom:none;padding-bottom:0}
-.snap-row .k{color:var(--mut2);font-weight:400}
-.snap-row .v{color:var(--text);font-weight:500}
-.avail{display:inline-flex;align-items:center;gap:.5rem}
-.avail .d{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px #4ade80;animation:pulse 2.4s ease-in-out infinite}
-
-/* spotlight card base */
-.spotcard{position:relative;overflow:hidden;background:var(--glass);border:1px solid var(--line);border-radius:20px;transition:transform .4s var(--ease),border-color .4s,background .4s}
-.spotcard::before{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .4s;pointer-events:none;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(166,177,255,.10),transparent 70%)}
-.spotcard:hover{transform:translateY(-6px);border-color:var(--line2);background:rgba(255,255,255,.045)}
-.spotcard:hover::before{opacity:1}
-
-/* EXPERIENCE */
-.exp-grid{display:grid;gap:1.3rem;margin-top:3.4rem}
-.exp{padding:2.3rem 2.4rem}
-.exp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;position:relative;z-index:1}
-.exp-t{font-family:var(--display);font-weight:600;font-size:1.22rem;letter-spacing:-.01em}
-.exp-co{color:var(--accent2);font-size:.9rem;font-weight:500;margin-top:.25rem}
-.exp-when{font-size:.78rem;color:var(--mut2);white-space:nowrap;border:1px solid var(--line);border-radius:100px;padding:.36rem .95rem;font-weight:500}
-.exp-list{list-style:none;margin-top:1.3rem;display:flex;flex-direction:column;gap:.7rem;position:relative;z-index:1}
-.exp-list li{color:var(--mut);font-size:.96rem;font-weight:300;padding-left:1.4rem;position:relative}
-.exp-list li::before{content:"";position:absolute;left:0;top:.62rem;width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.7}
-.exp-list li b{color:var(--text);font-weight:600}
-
-/* PROJECTS */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.4rem;margin-top:3.4rem}
-.proj{padding:2rem;display:flex;flex-direction:column}
-.proj-h{display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-bottom:1.1rem;position:relative;z-index:1}
-.proj-idx{font-family:var(--display);font-size:.85rem;color:var(--mut2);font-weight:500}
-.proj-tag{font-size:.68rem;letter-spacing:.02em;color:var(--accent2);border:1px solid rgba(200,182,255,.25);border-radius:100px;padding:.24rem .7rem;font-weight:500}
-.proj-name{font-family:var(--display);font-weight:600;font-size:1.22rem;margin-bottom:.65rem;letter-spacing:-.01em;position:relative;z-index:1}
-.proj-desc{color:var(--mut);font-size:.94rem;font-weight:300;flex:1;position:relative;z-index:1}
-.proj-stack{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.3rem;position:relative;z-index:1}
-.tk{font-size:.72rem;color:var(--mut);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:100px;padding:.26rem .7rem;font-weight:400}
-
-/* SKILLS marquee */
-.skills{background:var(--bg2);overflow:hidden}
-.rack{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);margin-top:3rem}
-.track{display:flex;gap:1rem;width:max-content;animation:scroll 40s linear infinite}
-.skills:hover .track{animation-play-state:paused}
-@keyframes scroll{to{transform:translateX(-50%)}}
-.chip{font-size:.86rem;color:var(--mut);background:var(--glass);border:1px solid var(--line);border-radius:100px;padding:.7rem 1.3rem;white-space:nowrap;font-weight:400}
-.chip b{color:var(--text);font-weight:500}
-
-/* CERTS */
-.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem;margin-top:3.4rem}
-.cert{padding:2.2rem 1.7rem;text-align:center}
-.cert .cg{font-family:var(--display);font-size:1.7rem;font-weight:600;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.7rem;position:relative;z-index:1;letter-spacing:-.02em}
-.cert .cn{font-family:var(--display);font-weight:600;font-size:1.08rem;position:relative;z-index:1}
-.cert .cm{font-size:.82rem;color:var(--mut2);margin-top:.45rem;position:relative;z-index:1;font-weight:400}
-.cert.feat{border-color:rgba(166,177,255,.35);background:rgba(166,177,255,.05)}
-.cert.feat .ribbon{position:absolute;top:.9rem;right:.9rem;font-size:.62rem;letter-spacing:.04em;color:var(--accent2);border:1px solid rgba(200,182,255,.3);border-radius:100px;padding:.2rem .6rem;z-index:1;font-weight:500}
-
-/* CONTACT */
-.contact{text-align:center;background:linear-gradient(180deg,var(--bg2),var(--bg))}
-.crow{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin:2.6rem 0 1rem}
-.crow a{font-size:.92rem;color:var(--text);border:1px solid var(--line2);border-radius:100px;padding:.78rem 1.5rem;background:var(--glass);transition:all .25s var(--ease);font-weight:400}
-.crow a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
-.foot{font-size:.82rem;color:var(--mut2);margin-top:3rem;font-weight:300}
-
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 1.6rem;position:relative}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+:focus-visible{outline:2.5px solid var(--rust);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--paper);padding:.6rem 1rem;z-index:200;border-radius:0 0 4px 0}
+.skip:focus{left:0}
+/* shared type */
+.eye{font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.9rem}
+.h2{font-family:var(--disp);font-weight:900;font-size:clamp(2rem,4.6vw,3.4rem);letter-spacing:-.01em;line-height:1.02;margin-bottom:1.1rem}
+.h2 em{font-style:italic;color:var(--rust)}
+.lede{color:var(--mut);max-width:62ch;font-size:1.05rem}
+/* nav */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.6rem;background:rgba(246,242,233,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.brand{font-family:var(--disp);font-weight:900;font-size:1.2rem}
+.nlinks{display:flex;gap:1.8rem;font-size:.85rem;align-items:center}
+.nlinks a{color:var(--ink2);position:relative;padding:.2rem 0}
+.nlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1.5px;background:var(--rust);transition:right .25s}
+.nlinks a:hover::after,.nlinks a:focus-visible::after{right:0}
+.ncta{font-size:.82rem;border:1.5px solid var(--ink);padding:.5rem 1rem;border-radius:2px;font-weight:600}
+.ncta:hover{background:var(--ink);color:var(--paper)}
+.burger{display:none;background:none;border:1.5px solid var(--ink);color:var(--ink);padding:.45rem .7rem;border-radius:2px;font-size:.85rem;font-weight:600;cursor:pointer}
+.mnav{display:none;position:fixed;inset:0 0 0 auto;width:min(80vw,300px);background:var(--paper2);border-left:1px solid var(--line);z-index:120;padding:5rem 2rem;flex-direction:column;gap:1.4rem}
+.mnav.open{display:flex}
+.mnav a{font-family:var(--disp);font-size:1.4rem;font-weight:700}
+.mnav .close{position:absolute;top:1.2rem;right:1.4rem;font-size:1.6rem;background:none;border:none;cursor:pointer;color:var(--ink)}
+.scrim{display:none;position:fixed;inset:0;background:rgba(28,26,22,.4);z-index:110}
+.scrim.open{display:block}
+/* hero */
+.hero{padding:5rem 0 3rem}
+.kicker{display:flex;align-items:center;gap:1rem;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:1.6rem}
+.kicker::after{content:"";flex:1;height:1px;background:var(--line)}
+.kicker .now{color:var(--rust);font-weight:700;display:inline-flex;align-items:center;gap:.45rem}
+.kicker .now::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rust)}
+h1{font-family:var(--disp);font-weight:900;font-size:clamp(3.2rem,11vw,7rem);line-height:.9;letter-spacing:-.02em}
+h1 em{font-style:italic;color:var(--rust)}
+.subhead{font-family:var(--disp);font-style:italic;font-size:clamp(1.2rem,2.6vw,1.75rem);color:var(--ink2);margin:1.2rem 0 1.4rem;max-width:32ch}
+.hsub{color:var(--mut);max-width:60ch;font-size:1.1rem}
+.hsub b{color:var(--ink);font-weight:600}
+.acts{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.btn{font-size:.92rem;font-weight:600;padding:.85rem 1.5rem;border-radius:2px;transition:transform .15s,background .2s,color .2s}
+.bp{background:var(--ink);color:var(--paper)}.bp:hover{transform:translateY(-2px)}
+.bg{border:1.5px solid var(--ink);color:var(--ink)}.bg:hover{background:var(--ink);color:var(--paper)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:3.4rem;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.st{padding:1.5rem 1rem;border-right:1px solid var(--line)}
+.st:last-child{border-right:none}
+.st-n{font-family:var(--disp);font-weight:900;font-size:clamp(2.2rem,5vw,3rem);line-height:1;color:var(--ink)}
+.st-n sup{color:var(--rust);font-size:.55em;vertical-align:super}
+.st-l{font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin-top:.5rem}
+section{padding:4.5rem 0}
+.alt{background:var(--paper2)}
+/* about */
+.about-grid{display:grid;grid-template-columns:1.5fr .85fr;gap:3rem;align-items:start}
+.ap{color:var(--ink2);margin-bottom:1rem;font-size:1.02rem}.ap b{color:var(--ink);font-weight:600}
+.dropcap::first-letter{font-family:var(--disp);font-weight:900;font-size:3.6rem;float:left;line-height:.78;margin:.12rem .55rem 0 0;color:var(--rust)}
+.snap{background:var(--paper);border:1px solid var(--line2);padding:1.6rem;border-radius:3px;box-shadow:0 1px 0 var(--line)}
+.snap-name{font-family:var(--disp);font-weight:700;font-size:1.2rem}
+.snap-role{font-size:.85rem;color:var(--mut);margin-bottom:.9rem}
+.srow{display:flex;justify-content:space-between;gap:1rem;font-size:.9rem;padding:.55rem 0;border-bottom:1px solid var(--line)}
+.srow .k{color:var(--mut)}.srow:last-child{border:none}
+.srow .v{text-align:right;font-weight:500}
+.srow .av{color:var(--rust);font-weight:600}
+/* experience */
+.exp{padding:1.8rem 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:.55fr 2fr;gap:1.5rem}
+.exp:last-child{border-bottom:none}
+.exp-when{font-size:.84rem;color:var(--mut);font-weight:500;padding-top:.3rem}
+.exp-t{font-family:var(--disp);font-weight:700;font-size:1.3rem;transition:color .2s}
+.exp:hover .exp-t{color:var(--rust)}
+.exp-co{color:var(--rust);font-size:.88rem;font-weight:600;margin:.1rem 0 .7rem}
+.exp-list{list-style:none}
+.exp-list li{color:var(--ink2);font-size:.96rem;padding-left:1.3rem;position:relative;margin-bottom:.5rem}
+.exp-list li::before{content:"—";position:absolute;left:0;color:var(--rust);font-weight:700}
+.exp-list b{color:var(--ink);font-weight:600}
+/* work */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:2rem}
+.proj{padding:1.7rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);transition:background .2s}
+.proj:nth-child(2n){border-right:none}
+.proj:hover{background:var(--paper3)}
+.proj-h{display:flex;justify-content:space-between;align-items:baseline}
+.proj-idx{font-family:var(--disp);font-weight:900;font-size:1.5rem;color:var(--gold)}
+.proj-tag{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:600}
+.proj-name{font-family:var(--disp);font-weight:700;font-size:1.22rem;margin:.5rem 0 .55rem}
+.proj-desc{color:var(--ink2);font-size:.92rem;margin-bottom:.9rem}
+.stack{display:flex;flex-wrap:wrap;gap:.45rem}
+.tk{font-size:.72rem;color:var(--mut);border:1px solid var(--line2);padding:.2rem .55rem;border-radius:2px;background:var(--paper)}
+.proj-note{font-size:.82rem;color:var(--mut);font-style:italic;margin-top:1.6rem;font-family:var(--disp)}
+/* skills */
+.skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:2rem}
+.skill-col h3{font-family:var(--disp);font-weight:700;font-size:1.15rem;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--ink)}
+.skill-list{display:flex;flex-wrap:wrap;gap:.5rem}
+.sk{font-size:.86rem;border:1px solid var(--line2);padding:.35rem .7rem;border-radius:2px;background:var(--paper);color:var(--ink2)}
+.sk.k{border-color:var(--rust);color:var(--rust);font-weight:600}
+/* certs */
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
+.cert{border:1px solid var(--line2);padding:1.4rem;text-align:center;border-radius:3px;background:var(--paper);position:relative;transition:transform .15s}
+.cert:hover{transform:translateY(-3px)}
+.cert .cg{font-family:var(--disp);font-weight:900;font-size:1.9rem;color:var(--rust)}
+.cert .cn{font-weight:600;margin-top:.5rem}.cert .cm{font-size:.74rem;color:var(--mut);margin-top:.25rem}
+.cert.feat{border:2px solid var(--ink)}
+.ribbon{position:absolute;top:.6rem;right:.6rem;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;background:var(--rust);color:var(--paper);padding:.15rem .4rem;border-radius:2px;font-weight:700}
+/* contact */
+.contact{text-align:center;background:var(--ink);color:var(--paper)}
+.contact .eye{color:#E8A893}
+.contact .h2{color:var(--paper)}.contact .h2 em{color:#E8A893}
+.contact .lede{color:#C9C2B3;margin:0 auto}
+.crow{display:flex;gap:1.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.8rem;font-size:.98rem;font-weight:500}
+.crow a{color:#E8A893;border-bottom:1.5px solid transparent;padding-bottom:2px}
+.crow a:hover{border-color:#E8A893}
+.foot{font-size:.82rem;color:#9c9486;margin-top:2.8rem;font-style:italic;font-family:var(--disp)}
+/* ---- delight layer (fine-pointer + motion-OK only; native cursor preserved otherwise) ---- */
+.spotlight{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:0;transition:opacity .5s;mix-blend-mode:multiply;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),rgba(169,58,31,.10),rgba(154,123,64,.05) 42%,transparent 66%)}
+body.cursor-on .spotlight{opacity:1}
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:300;border-radius:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .3s,width .18s,height .18s,background .18s,border-color .18s}
+.cursor-dot{width:7px;height:7px;background:var(--rust)}
+.cursor-ring{width:32px;height:32px;border:1.5px solid var(--rust)}
+body.cursor-on .cursor-dot,body.cursor-on .cursor-ring{opacity:1}
+body.cursor-on.hovering .cursor-ring{width:54px;height:54px;background:rgba(169,58,31,.07);border-color:var(--rust2)}
+body.cursor-on.hovering .cursor-dot{opacity:.4}
+body.cursor-on,body.cursor-on a,body.cursor-on button{cursor:none}
+.btn{will-change:transform}
+.proj{transition:background .2s,transform .25s ease;will-change:transform}
+/* hero name underline draws on load */
+h1 em{position:relative}
+h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.01em;height:.08em;background:var(--rust);border-radius:3px;transform:scaleX(0);transform-origin:left;animation:hdraw 1.1s .45s cubic-bezier(.6,.1,.2,1) forwards}
+@keyframes hdraw{to{transform:scaleX(1)}}
+/* footer Claude nod — looping ink sweep */
+.foot .claude{color:#E8A893;font-style:normal;font-weight:600;position:relative;white-space:nowrap}
+.foot .claude::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1.5px;background:#E8A893;transform-origin:left;animation:sweep 3.6s ease-in-out infinite}
+@keyframes sweep{0%,100%{transform:scaleX(0);transform-origin:left}45%{transform:scaleX(1);transform-origin:left}55%{transform:scaleX(1);transform-origin:right}99%{transform:scaleX(0);transform-origin:right}}
 /* reveal */
-.rev{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.js .rev.in{opacity:1;transform:none}
-@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-@keyframes fade{to{opacity:1}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rev{opacity:1;transform:none}.track{animation:none!important}.orb{display:none}}
+.rev{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.rev.in{opacity:1;transform:none}
+@media(max-width:780px){
+  .nlinks{display:none}.burger{display:block}
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .exp{grid-template-columns:1fr;gap:.5rem}
+  .pgrid{grid-template-columns:1fr}.proj{border-right:none}
+  .stats{grid-template-columns:1fr 1fr}.st:nth-child(2n){border-right:none}.st:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .cgrid{grid-template-columns:1fr 1fr}.skill-grid{grid-template-columns:1fr;gap:1.8rem}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}.rev{opacity:1;transform:none}.spotlight,.cursor-dot,.cursor-ring{display:none}h1 em::after{transform:scaleX(1)}}
 </style>
 </head>
 <body>
-<div id="progress"></div>
-<div id="spot"></div>
-<div class="orb a"></div><div class="orb b"></div>
-<div id="cur"></div><div id="ring"></div>
-
+<a class="skip" href="#main">Skip to content</a>
+<div class="spotlight" id="spotlight" aria-hidden="true"></div>
+<div class="cursor-ring" id="cring" aria-hidden="true"></div>
+<div class="cursor-dot" id="cdot" aria-hidden="true"></div>
 <nav>
-  <div class="logo">Al Schramm<span class="dot">.</span></div>
+  <a class="brand" href="#top">Al Schramm</a>
   <ul class="nlinks">
-    <li><a href="#about">About</a></li>
-    <li><a href="#exp">Experience</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#certs">Credentials</a></li>
+    <li><a href="#about">About</a></li><li><a href="#exp">Experience</a></li>
+    <li><a href="#work">Work</a></li><li><a href="#skills">Skills</a></li><li><a href="#certs">Credentials</a></li>
+    <li><a class="ncta" href="Al_Schramm_Resume.pdf" download>Résumé</a></li>
   </ul>
-  <a class="ncta" href="Al_Schramm_Resume.pdf" download>Résumé</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">Menu</button>
 </nav>
+<div class="scrim" id="scrim"></div>
+<aside class="mnav" id="mnav" aria-label="Mobile navigation">
+  <button class="close" id="mclose" aria-label="Close menu">&times;</button>
+  <a href="#about">About</a><a href="#exp">Experience</a><a href="#work">Work</a>
+  <a href="#skills">Skills</a><a href="#certs">Credentials</a>
+  <a href="Al_Schramm_Resume.pdf" download>Download Résumé</a>
+</aside>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="hin">
-    <div class="tagpill"><span class="lv"></span> Operations Leader · AI Fluency Certified · Builder</div>
-    <h1 class="hname">Al <span class="g">Schramm</span></h1>
-    <div class="hrole"><span class="tw" id="tw"></span><span class="car">|</span></div>
-    <p class="hsub">A decade leading <b>high-volume logistics</b> at Amazon, Walmart &amp; FedEx — then quietly shipping the <b>dashboards, AI tools, and self-hosted systems</b> that make the floor run smarter.</p>
-    <div class="hacts">
-      <a class="btn bp" href="#work">View the Work</a>
-      <a class="btn bg" href="Al_Schramm_Resume.pdf" download>Download Résumé</a>
-    </div>
-    <div class="hstats">
-      <div class="st"><div class="st-n" data-n="10" data-suf="+">0</div><div class="st-l">Years in Operations</div></div>
-      <div class="st"><div class="st-n" data-n="500" data-suf="+">0</div><div class="st-l">Associates Led</div></div>
-      <div class="st"><div class="st-n" data-n="8" data-suf="+">0</div><div class="st-l">Tools Shipped</div></div>
-      <div class="st"><div class="st-n" data-n="3">0</div><div class="st-l">Fortune-500 Orgs</div></div>
-    </div>
+<main id="main">
+<header class="hero" id="top"><div class="wrap">
+  <div class="kicker"><span class="now">Currently</span> Open to new roles — Greater Philadelphia</div>
+  <h1>Al <em>Schramm</em></h1>
+  <p class="subhead">Operations leader, by day. Builder of tools, by night.</p>
+  <p class="hsub">A decade leading <b>high-volume logistics</b> at Amazon, Walmart &amp; FedEx — then quietly shipping the <b>dashboards, AI tools, and self-hosted systems</b> that make the floor run smarter.</p>
+  <div class="acts"><a class="btn bp" href="#work">View the Work</a><a class="btn bg" href="Al_Schramm_Resume.pdf" download>Download Résumé</a></div>
+  <div class="stats">
+    <div class="st"><div class="st-n" data-n="10"><sup>+</sup></div><div class="st-l">Years in Operations</div></div>
+    <div class="st"><div class="st-n" data-n="500"><sup>+</sup></div><div class="st-l">Associates Led</div></div>
+    <div class="st"><div class="st-n" data-n="8"><sup>+</sup></div><div class="st-l">Tools Shipped</div></div>
+    <div class="st"><div class="st-n" data-n="3"></div><div class="st-l">Fortune-500 Orgs</div></div>
   </div>
-  <div class="shint">Scroll<div class="sbar"></div></div>
-</header>
+</div></header>
 
-<!-- ABOUT -->
-<section id="about" class="about">
-  <div class="wrap">
-    <div class="agrid">
-      <div class="rev">
-        <div class="eye">About</div>
-        <h2 class="h2">Operator by day. <span class="g">Builder</span> by night.</h2>
-        <p class="ap">PHR-certified operations and people leader with <b>10+ years</b> running high-volume logistics, distribution, and fulfillment at <b>Amazon, Walmart, and FedEx</b>. The day job is developing front-line leaders and driving operational excellence through Lean / Six Sigma — at real scale.</p>
-        <p class="ap">The after-hours habit is <b>writing software</b> — dashboards, browser apps, desktop tools, and AI agents that replace the spreadsheets and manual reports nobody enjoyed. Equally at home coaching a floor team through a brutal shift or wiring up a dashboard at 11pm. Recently <b>AI Fluency certified through Anthropic Academy</b>, and a believer in standard work, clean data, and self-hosted AI.</p>
-      </div>
-      <div class="rev">
-        <div class="snap spotcard">
-          <div class="snap-top">
-            <div class="mono-ring"><span>AS</span></div>
-            <div><div class="snap-name">Al Schramm, PHR</div><div class="snap-role">Operations &amp; People Leader</div></div>
-          </div>
-          <div class="snap-rows">
-            <div class="snap-row"><span class="k">Based in</span><span class="v">Greater Philadelphia</span></div>
-            <div class="snap-row"><span class="k">Focus</span><span class="v">Ops · People · Quality</span></div>
-            <div class="snap-row"><span class="k">Builds with</span><span class="v">Python · FastAPI · AI</span></div>
-            <div class="snap-row"><span class="k">Status</span><span class="v avail"><span class="d"></span>Open to new roles</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
+<section id="about"><div class="wrap"><div class="about-grid">
+  <div class="rev">
+    <div class="eye">About</div>
+    <h2 class="h2">Operator by day. <em>Builder</em> by night.</h2>
+    <p class="ap dropcap">PHR-certified operations and people leader with <b>10+ years</b> running high-volume logistics, distribution, and fulfillment at <b>Amazon, Walmart, and FedEx</b>. The day job is developing front-line leaders and driving operational excellence through Lean / Six Sigma — at real scale.</p>
+    <p class="ap">The after-hours habit is <b>writing software</b> — dashboards, browser apps, desktop tools, and AI agents that replace the spreadsheets and manual reports nobody enjoyed. Equally at home coaching a floor team through a brutal shift or wiring up a dashboard at 11pm. Recently <b>AI Fluency certified through Anthropic Academy</b>, and a believer in standard work, clean data, and self-hosted AI.</p>
   </div>
-</section>
+  <div class="snap rev">
+    <div class="snap-name">Al Schramm, PHR</div><div class="snap-role">Operations &amp; People Leader</div>
+    <div class="srow"><span class="k">Based in</span><span class="v">Greater Philadelphia</span></div>
+    <div class="srow"><span class="k">Focus</span><span class="v">Ops · People · Quality</span></div>
+    <div class="srow"><span class="k">Builds with</span><span class="v">Python · FastAPI · AI</span></div>
+    <div class="srow"><span class="k">Status</span><span class="v av">Open to new roles</span></div>
+  </div>
+</div></div></section>
 
-<!-- EXPERIENCE -->
-<section id="exp">
-  <div class="wrap">
-    <div class="rev">
-      <div class="eye">Experience</div>
-      <h2 class="h2">Where I've <span class="g">led.</span></h2>
+<section id="exp" class="alt"><div class="wrap">
+  <div class="rev"><div class="eye">Experience</div><h2 class="h2">Where I've <em>led.</em></h2></div>
+  <div class="rev">
+    <div class="exp"><div class="exp-when">Jun 2024 — Present</div><div><div class="exp-t">People Operations Manager</div><div class="exp-co">Walmart</div><ul class="exp-list"><li>Lead a <b>50+ associate team across five departments</b> — coaching supervisors on performance, accountability, and safety in a high-volume environment.</li><li>Served as <b>Acting Site Manager for 8 months</b> — owning staffing, scheduling, escalations, safety compliance, and regional leadership reporting through a full leadership vacancy.</li><li>Built a <b>leadership bootcamp</b> to grow hourly associates into leaders — promoted 3 Team Leads to Area Manager and cut regional fill time by <b>50%</b>.</li><li>Applied Lean tools to standardize workflows and reduce waste — sustained <b>zero lost-time safety incidents</b> across shifts.</li></ul></div></div>
+    <div class="exp"><div class="exp-when">Jan 2021 — Jun 2024</div><div><div class="exp-t">HR Business Partner II</div><div class="exp-co">Amazon · Philadelphia Region</div><ul class="exp-list"><li>People partner for <b>500+ associates</b> across the final-mile network — coaching managers, driving performance, and owning regional engagement.</li><li>Rebuilt engagement at a struggling delivery station through interactive displays and recognition programs — connection scores surged; promoted to lead regional engagement.</li><li>Selected <b>twice</b> for the Employee Relations Jump Team (2023) for high-stakes labor campaigns.</li><li>Earned the Global Delivery Services <b>Amazon Excellence Award</b> (2024).</li></ul></div></div>
+    <div class="exp"><div class="exp-when">Dec 2019 — Jan 2021</div><div><div class="exp-t">Operations Manager — Fulfillment &amp; Logistics</div><div class="exp-co">Amazon · Philadelphia Region</div><ul class="exp-list"><li>Managed <b>300+ associates</b> across multi-shift fulfillment operations — coaching front-line leads and applying Lean / Six Sigma to drive throughput and safety.</li><li>Supported <b>six delivery station launches</b> across the region — onboarding, culture-setting, and operational standup for new teams at scale.</li></ul></div></div>
+    <div class="exp"><div class="exp-when">Earlier Career</div><div><div class="exp-t">Operations Leadership</div><div class="exp-co">FedEx · Greater Philadelphia</div><ul class="exp-list"><li>Built foundational team leadership and logistics operations skills in high-volume, fast-paced delivery environments.</li></ul></div></div>
+  </div>
+</div></section>
+
+<section id="work"><div class="wrap">
+  <div class="rev"><div class="eye">Selected Work</div><h2 class="h2">Tools I've <em>designed &amp; shipped.</em></h2>
+  <p class="lede">Real software solving real operational problems — mostly Python, FastAPI, HTMX, and a refusal to accept "that's just how the spreadsheet works." Specifics generalized; happy to demo any of it.</p></div>
+  <div class="pgrid rev">
+    <div class="proj"><div class="proj-h"><span class="proj-idx">01</span><span class="proj-tag">Ops Tooling</span></div><div class="proj-name">Project Pipeline Dashboard</div><p class="proj-desc">Turns a sprawling project-planning spreadsheet into a fast, filterable single source of truth — filter the network pipeline by site or region and instantly see go-live dates, execution status, and contact lookups. No database: an atomic JSON snapshot with one-click rollback. Tolerant column-mapping survives messy spreadsheet headers, and it ships as both a live app and a baked static build.</p><div class="stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">HTMX</span><span class="tk">Jinja</span></div></div>
+    <div class="proj"><div class="proj-h"><span class="proj-idx">02</span><span class="proj-tag">Browser App</span></div><div class="proj-name">Field Quality Audit App</div><p class="proj-desc">A zero-install, browser-only auditing app rolled out org-wide. Identity auto-fills from single sign-on, with live webcam capture and in-browser image compression, plus per-device audit history in IndexedDB. Generates a ready-to-send email draft so a human reviews and sends — it never auto-sends. Runs fully client-side, no server to maintain.</p><div class="stack"><span class="tk">Vanilla JS</span><span class="tk">IndexedDB</span><span class="tk">WebRTC</span><span class="tk">SSO</span></div></div>
+    <div class="proj"><div class="proj-h"><span class="proj-idx">03</span><span class="proj-tag">AI · Agents</span></div><div class="proj-name">Autonomous Agent Relay</div><p class="proj-desc">An experimental channel letting two autonomous AI coding agents on separate machines coordinate on shared work — a file-drop mailbox, polling cadence, presence pings, and resume/handoff so long-running tasks survive restarts. My playground for agentic, self-hosted AI.</p><div class="stack"><span class="tk">Python</span><span class="tk">Agent Orchestration</span><span class="tk">IPC</span></div></div>
+    <div class="proj"><div class="proj-h"><span class="proj-idx">04</span><span class="proj-tag">Freelance · AI</span></div><div class="proj-name">AI Operations Command Center</div><p class="proj-desc">A turnkey ops platform delivered for a small-business client: customer-facing site, quote intake with lead-time guardrails, a PO-ready invoice generator with Excel/CSV export, service-area classification, and seams wired for AI-assisted email and customer service.</p><div class="stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">AI Integration</span><span class="tk">Invoicing</span></div></div>
+    <div class="proj"><div class="proj-h"><span class="proj-idx">05</span><span class="proj-tag">Integration</span></div><div class="proj-name">Workforce Scheduling Dashboard</div><p class="proj-desc">A self-hosted dashboard that authenticates against a workforce-management SaaS, replays its session calls, and pulls Schedules, Timecards, Roster, and Accruals into custom reports the vendor UI never offered — with keep-alive pings, graceful session-expiry handling, and a disk-snapshot fallback so it still renders the last good data when a session expires.</p><div class="stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">Session Auth</span><span class="tk">Reporting</span></div></div>
+    <div class="proj"><div class="proj-h"><span class="proj-idx">06</span><span class="proj-tag">Ops Tooling</span></div><div class="proj-name">Operations Command Center</div><p class="proj-desc">A real-time "single pane of glass" for floor operations — live picking and closeout status, exception queues, and daily execution metrics pulled from operational exports and rendered for at-a-glance decisions. Portable and zero-install, auto-detecting its site from the operator's login so one build runs anywhere.</p><div class="stack"><span class="tk">Python</span><span class="tk">Dashboards</span><span class="tk">Data Viz</span></div></div>
+    <div class="proj"><div class="proj-h"><span class="proj-idx">07</span><span class="proj-tag">Privacy-first</span></div><div class="proj-name">Warehouse Productivity Analytics</div><p class="proj-desc">Aggregate workload analytics with a privacy-first spine: raw values are hashed before storage, person and timestamp fields are never persisted, and only aggregate-safe metrics are rendered. Surfaces overdue and due-today queues, zone distribution, and exception lists.</p><div class="stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">SQLite</span><span class="tk">Privacy-by-design</span></div></div>
+    <div class="proj"><div class="proj-h"><span class="proj-idx">08</span><span class="proj-tag">Desktop</span></div><div class="proj-name">Dual Workspace</div><p class="proj-desc">A desktop app running two fully isolated Microsoft 365 accounts in one window — each pane independently switches between Teams, Outlook, and Calendar, with separate profiles, theming, and live notification badges. Built on WebView2.</p><div class="stack"><span class="tk">PowerShell</span><span class="tk">WebView2</span><span class="tk">.NET</span></div></div>
+  </div>
+  <p class="proj-note">Eight shipped tools and counting — every one born from a real operational headache.</p>
+</div></section>
+
+<section id="skills" class="alt"><div class="wrap">
+  <div class="rev"><div class="eye">The Stack</div><h2 class="h2">Tools of the <em>trade.</em></h2></div>
+  <div class="skill-grid rev">
+    <div class="skill-col">
+      <h3>The Build Stack</h3>
+      <div class="skill-list">
+        <span class="sk k">Python</span><span class="sk k">FastAPI</span><span class="sk">HTMX</span><span class="sk">Jinja</span><span class="sk">JavaScript</span><span class="sk">IndexedDB</span><span class="sk">WebRTC</span><span class="sk">SQLite</span><span class="sk">PowerShell</span><span class="sk">WebView2</span><span class="sk">.NET</span><span class="sk k">AI Agents</span><span class="sk">Self-hosted AI</span><span class="sk">Tailwind</span><span class="sk">Git</span>
+      </div>
     </div>
-    <div class="exp-grid">
-      <div class="exp spotcard rev">
-        <div class="exp-top">
-          <div><div class="exp-t">Area Manager II — Supply Chain Operations</div><div class="exp-co">Walmart · Pedricktown, NJ</div></div>
-          <div class="exp-when">Jun 2024 — Present</div>
-        </div>
-        <ul class="exp-list">
-          <li>Lead a <b>50+ associate team across five departments</b> — coaching supervisors on performance, accountability, and safety in a high-volume environment.</li>
-          <li>Served as <b>Acting Site Manager for 8 months</b> — owning staffing, scheduling, escalations, safety compliance, and regional leadership reporting through a full leadership vacancy.</li>
-          <li>Built a <b>"POD Prep Bootcamp"</b> to grow hourly associates into leaders — promoted 3 Team Leads to Area Manager and cut regional fill time by <b>50%</b>.</li>
-          <li>Applied Lean tools to standardize workflows and reduce waste — sustained <b>zero lost-time safety incidents</b> across shifts.</li>
-        </ul>
-      </div>
-      <div class="exp spotcard rev">
-        <div class="exp-top">
-          <div><div class="exp-t">HR Business Partner II</div><div class="exp-co">Amazon · Philadelphia Region</div></div>
-          <div class="exp-when">Jan 2021 — Jun 2024</div>
-        </div>
-        <ul class="exp-list">
-          <li>People partner for <b>500+ associates</b> across Amazon's final-mile network — coaching managers, driving performance, and owning regional engagement.</li>
-          <li>Rebuilt engagement at a struggling delivery station through interactive displays and recognition programs — connection scores surged; promoted to lead PA Region engagement.</li>
-          <li>Selected <b>twice</b> for the Employee Relations Jump Team (2023) for high-stakes labor campaigns.</li>
-          <li>Earned the Global Delivery Services <b>Amazon Excellence Award</b> (2024).</li>
-        </ul>
-      </div>
-      <div class="exp spotcard rev">
-        <div class="exp-top">
-          <div><div class="exp-t">Operations Manager — Fulfillment &amp; Logistics</div><div class="exp-co">Amazon · Philadelphia Region</div></div>
-          <div class="exp-when">Dec 2019 — Jan 2021</div>
-        </div>
-        <ul class="exp-list">
-          <li>Managed <b>300+ associates</b> across multi-shift fulfillment operations — coaching front-line leads and applying Lean / Six Sigma to drive throughput and safety.</li>
-          <li>Supported <b>six delivery station launches</b> across the Philadelphia region — onboarding, culture-setting, and operational standup for new teams at scale.</li>
-        </ul>
-      </div>
-      <div class="exp spotcard rev">
-        <div class="exp-top">
-          <div><div class="exp-t">Operations Leadership</div><div class="exp-co">FedEx · Greater Philadelphia</div></div>
-          <div class="exp-when">Earlier Career</div>
-        </div>
-        <ul class="exp-list">
-          <li>Built foundational team leadership and logistics operations skills in high-volume, fast-paced delivery environments.</li>
-        </ul>
+    <div class="skill-col">
+      <h3>The Human Stack</h3>
+      <div class="skill-list">
+        <span class="sk k">Team Development &amp; Coaching</span><span class="sk">Labor Planning</span><span class="sk">KPI &amp; Workforce Analytics</span><span class="sk">Employee Relations &amp; Investigations</span><span class="sk">Standard Work / SOPs</span><span class="sk">Safety Culture &amp; Compliance</span><span class="sk k">Lean / Six Sigma</span><span class="sk">Change Management</span>
       </div>
     </div>
   </div>
-</section>
+</div></section>
 
-<!-- WORK / PROJECTS -->
-<section id="work">
-  <div class="wrap">
-    <div class="rev">
-      <div class="eye">Selected Work</div>
-      <h2 class="h2">Tools I've <span class="g">designed &amp; shipped.</span></h2>
-      <p class="lede">Real software solving real operational problems — mostly Python, FastAPI, HTMX, and a refusal to accept "that's just how the spreadsheet works." Details generalized; happy to demo any of it.</p>
-    </div>
-    <div class="pgrid">
-
-      <div class="proj spotcard rev">
-        <div class="proj-h"><span class="proj-idx">01</span><span class="proj-tag">Ops Tooling</span></div>
-        <div class="proj-name">Project Pipeline Dashboard</div>
-        <p class="proj-desc">Turns a sprawling planning spreadsheet into a fast, filterable single source of truth — site/region filters, status buckets, milestone dates, and live contact lookups. No database: an atomic JSON snapshot with one-click rollback. Ships as both a live app and a baked static build.</p>
-        <div class="proj-stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">HTMX</span><span class="tk">Jinja</span></div>
-      </div>
-
-      <div class="proj spotcard rev">
-        <div class="proj-h"><span class="proj-idx">02</span><span class="proj-tag">Browser App</span></div>
-        <div class="proj-name">Field Quality Audit App</div>
-        <p class="proj-desc">A zero-install, browser-only auditing app rolled out org-wide. Identity auto-fills from SSO, live webcam capture with in-browser image compression, and per-device history in IndexedDB. Generates a ready-to-send email draft so a human reviews and sends — never auto-sends.</p>
-        <div class="proj-stack"><span class="tk">Vanilla JS</span><span class="tk">IndexedDB</span><span class="tk">WebRTC</span><span class="tk">SSO</span></div>
-      </div>
-
-      <div class="proj spotcard rev">
-        <div class="proj-h"><span class="proj-idx">03</span><span class="proj-tag">AI · Agents</span></div>
-        <div class="proj-name">Autonomous Agent Relay</div>
-        <p class="proj-desc">An experimental channel letting two autonomous AI coding agents on separate machines coordinate on shared work — file-drop mailbox, polling cadence, presence pings, and resume/handoff so long-running tasks survive restarts. My playground for agentic, self-hosted AI.</p>
-        <div class="proj-stack"><span class="tk">Python</span><span class="tk">Agent Orchestration</span><span class="tk">IPC</span></div>
-      </div>
-
-      <div class="proj spotcard rev">
-        <div class="proj-h"><span class="proj-idx">04</span><span class="proj-tag">Freelance · AI</span></div>
-        <div class="proj-name">AI Operations Command Center</div>
-        <p class="proj-desc">A turnkey ops platform delivered for a small-business client: customer-facing site, quote intake with lead-time guardrails, a PO-ready invoice generator with Excel/CSV export, service-area classification, and seams wired for AI-assisted email and customer service.</p>
-        <div class="proj-stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">AI Integration</span><span class="tk">Invoicing</span></div>
-      </div>
-
-      <div class="proj spotcard rev">
-        <div class="proj-h"><span class="proj-idx">05</span><span class="proj-tag">Integration</span></div>
-        <div class="proj-name">Workforce Scheduling Dashboard</div>
-        <p class="proj-desc">A self-hosted dashboard that authenticates against a workforce-management SaaS, replays its session calls, and pulls Schedules, Timecards, Roster, and Accruals into custom reports the vendor UI never offered — with keep-alive pings and graceful session-expiry handling.</p>
-        <div class="proj-stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">Session Auth</span><span class="tk">Reporting</span></div>
-      </div>
-
-      <div class="proj spotcard rev">
-        <div class="proj-h"><span class="proj-idx">06</span><span class="proj-tag">Ops Tooling</span></div>
-        <div class="proj-name">Operations Command Center</div>
-        <p class="proj-desc">A real-time "single pane of glass" for floor operations — live picking and closeout status, exception queues, and daily execution metrics pulled from operational exports and rendered for at-a-glance decisions.</p>
-        <div class="proj-stack"><span class="tk">Python</span><span class="tk">Dashboards</span><span class="tk">Data Viz</span></div>
-      </div>
-
-      <div class="proj spotcard rev">
-        <div class="proj-h"><span class="proj-idx">07</span><span class="proj-tag">Privacy-first</span></div>
-        <div class="proj-name">Warehouse Productivity Analytics</div>
-        <p class="proj-desc">Aggregate workload analytics with a privacy-first spine: raw values hashed before storage, person/timestamp fields never persisted, only aggregate-safe metrics rendered. Overdue and due-today queues, zone distribution, and exception lists.</p>
-        <div class="proj-stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">SQLite</span><span class="tk">Privacy-by-design</span></div>
-      </div>
-
-      <div class="proj spotcard rev">
-        <div class="proj-h"><span class="proj-idx">08</span><span class="proj-tag">Desktop</span></div>
-        <div class="proj-name">Dual Workspace</div>
-        <p class="proj-desc">A desktop app running two fully isolated Microsoft 365 accounts in one window — each pane independently switches between Teams, Outlook, and Calendar, with separate profiles, theming, and live notification badges. Built on WebView2.</p>
-        <div class="proj-stack"><span class="tk">PowerShell</span><span class="tk">WebView2</span><span class="tk">.NET</span></div>
-      </div>
-
-    </div>
+<section id="certs"><div class="wrap">
+  <div class="rev"><div class="eye">Credentials</div><h2 class="h2">Marks <em>earned.</em></h2></div>
+  <div class="cgrid rev">
+    <div class="cert feat"><span class="ribbon">New · 2026</span><div class="cg">AI</div><div class="cn">AI Fluency</div><div class="cm">Anthropic Academy · 2026</div></div>
+    <div class="cert"><div class="cg">PHR</div><div class="cn">Professional in HR</div><div class="cm">HRCI · 2023</div></div>
+    <div class="cert"><div class="cg">6S</div><div class="cn">Six Sigma Yellow Belt</div><div class="cm">2024</div></div>
+    <div class="cert"><div class="cg">ML</div><div class="cn">Machine Learning Spec.</div><div class="cm">Stanford · Coursera — In Progress</div></div>
   </div>
-</section>
+</div></section>
 
-<!-- SKILLS -->
-<section id="skills" class="skills">
-  <div class="wrap rev">
-    <div class="eye">The Stack</div>
-    <h2 class="h2">Tools of the <span class="g">trade.</span></h2>
+<section id="contact" class="contact"><div class="wrap rev">
+  <div class="eye" style="color:#E8A893">Get in touch</div>
+  <h2 class="h2">Let's build the <em>next thing.</em></h2>
+  <p class="lede">Open to operations, HR, and quality leadership roles — and to relocation. Greater Philadelphia Area.</p>
+  <div class="crow">
+    <a href="mailto:schramm.al@outlook.com">schramm.al@outlook.com</a>
+    <a href="tel:2155342155">215.534.2155</a>
+    <a href="https://linkedin.com/in/alschr" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://schrammal.github.io/Alschr" target="_blank" rel="noopener">GitHub Portfolio</a>
   </div>
-  <div class="rack">
-    <div class="track" id="track"></div>
-  </div>
-  <div class="wrap rev" style="margin-top:3rem">
-    <p class="lede">Plus the human stack: team development &amp; coaching, labor planning, KPI &amp; workforce analytics, employee relations &amp; investigations, standard work / SOPs, safety culture &amp; compliance, and Lean / Six Sigma continuous improvement.</p>
-  </div>
-</section>
-
-<!-- CERTS -->
-<section id="certs">
-  <div class="wrap">
-    <div class="rev">
-      <div class="eye">Credentials</div>
-      <h2 class="h2">Marks <span class="g">earned.</span></h2>
-    </div>
-    <div class="cgrid">
-      <div class="cert feat spotcard rev"><span class="ribbon">New · 2026</span><div class="cg">AI</div><div class="cn">AI Fluency</div><div class="cm">Anthropic Academy · 2026</div></div>
-      <div class="cert spotcard rev"><div class="cg">PHR</div><div class="cn">Professional in HR</div><div class="cm">HRCI · 2023</div></div>
-      <div class="cert spotcard rev"><div class="cg">6σ</div><div class="cn">Six Sigma Yellow Belt</div><div class="cm">2024</div></div>
-      <div class="cert spotcard rev"><div class="cg">ML</div><div class="cn">Machine Learning Spec.</div><div class="cm">Stanford · Coursera — In Progress</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="contact">
-  <div class="wrap rev">
-    <div class="eye" style="justify-content:center">Get in touch</div>
-    <h2 class="h2">Let's build the <span class="g">next thing.</span></h2>
-    <p class="lede" style="margin:0 auto">Open to operations, HR, and quality leadership roles — and to relocation. Greater Philadelphia Area.</p>
-    <div class="crow">
-      <a href="mailto:schramm.al@outlook.com">schramm.al@outlook.com</a>
-      <a href="tel:2155342155">215.534.2155</a>
-      <a href="https://linkedin.com/in/alschr" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://schrammal.github.io/Alschr" target="_blank" rel="noopener">GitHub Portfolio</a>
-    </div>
-    <p class="foot">Designed &amp; built from scratch — no frameworks, no templates. © 2026 Al Schramm</p>
-  </div>
-</section>
+  <p class="foot">Designed &amp; built from scratch — no frameworks, no templates, just me and a little help from <span class="claude">Claude</span>. © 2026 Al Schramm</p>
+</div></section>
+</main>
 
 <script>
-document.documentElement.classList.add('js');
-var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* progress bar */
-var prog=document.getElementById('progress');
-addEventListener('scroll',function(){
-  var h=document.documentElement;var p=h.scrollTop/(h.scrollHeight-h.clientHeight);
-  prog.style.width=(p*100)+'%';
-});
-
-/* custom cursor + sitewide spotlight */
-var cur=document.getElementById('cur'),ring=document.getElementById('ring'),spot=document.getElementById('spot');
-var rx=innerWidth/2,ry=innerHeight/2,cx=rx,cy=ry;
-addEventListener('mousemove',function(e){
-  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
-  rx=e.clientX;ry=e.clientY;
-  spot.style.setProperty('--gx',e.clientX+'px');
-  spot.style.setProperty('--gy',e.clientY+'px');
-});
-(function loop(){cx+=(rx-cx)*.16;cy+=(ry-cy)*.16;ring.style.left=cx+'px';ring.style.top=cy+'px';requestAnimationFrame(loop);})();
-document.querySelectorAll('a,button,.spotcard').forEach(function(el){
-  el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});
-  el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});
-});
-
-/* per-card spotlight glow */
-document.querySelectorAll('.spotcard').forEach(function(c){
-  c.addEventListener('mousemove',function(e){
-    var r=c.getBoundingClientRect();
-    c.style.setProperty('--mx',(e.clientX-r.left)+'px');
-    c.style.setProperty('--my',(e.clientY-r.top)+'px');
-  });
-});
-
-/* typing role text */
-var roles=['Area Manager II, PHR','AI Fluency certified (Anthropic)','Self-hosted AI tinkerer','Lean / Six Sigma operator','Dashboards over spreadsheets'];
-var tw=document.getElementById('tw'),ri=0,ci=0,del=false;
-function type(){
-  var w=roles[ri];
-  tw.textContent=del?w.substring(0,ci--):w.substring(0,ci++);
-  if(!del&&ci===w.length+1){del=true;setTimeout(type,1500);return;}
-  if(del&&ci===0){del=false;ri=(ri+1)%roles.length;}
-  setTimeout(type,del?38:72);
-}
-if(rm){tw.textContent=roles[0];}else{type();}
-
-/* reveal + count up */
-function countUp(el){
-  var target=+el.dataset.n,suf=el.dataset.suf||'',cur=0,step=Math.max(1,Math.round(target/45));
-  (function tick(){cur+=step;if(cur>=target){el.textContent=target+suf;}else{el.textContent=cur+suf;requestAnimationFrame(tick);}})();
-}
-var io=new IntersectionObserver(function(es){
-  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-},{threshold:.12});
-document.querySelectorAll('.rev').forEach(function(el){io.observe(el);});
-var sio=new IntersectionObserver(function(es){
-  es.forEach(function(e){if(e.isIntersecting){if(rm){e.target.textContent=e.target.dataset.n+(e.target.dataset.suf||'');}else{countUp(e.target);}sio.unobserve(e.target);}});
-},{threshold:.5});
-document.querySelectorAll('.st-n').forEach(function(el){sio.observe(el);});
-
-/* skills marquee (doubled for seamless loop) */
-var skills=['Python','FastAPI','HTMX','Jinja2','SQLite','JavaScript','IndexedDB','WebRTC','PowerShell','WebView2','REST APIs','Session Auth','Pandas','Excel / openpyxl','Git','Data Viz','Self-hosted AI','Anthropic / Claude','Machine Learning','Privacy-by-design'];
-var track=document.getElementById('track');
-var html=skills.map(function(s){return '<span class="chip"><b>'+s+'</b></span>';}).join('');
-track.innerHTML=html+html;
+(function(){
+  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // mobile nav
+  var burger=document.getElementById('burger'),mnav=document.getElementById('mnav'),
+      scrim=document.getElementById('scrim'),mclose=document.getElementById('mclose');
+  function openM(){mnav.classList.add('open');scrim.classList.add('open');burger.setAttribute('aria-expanded','true');}
+  function closeM(){mnav.classList.remove('open');scrim.classList.remove('open');burger.setAttribute('aria-expanded','false');}
+  burger.addEventListener('click',openM);mclose.addEventListener('click',closeM);scrim.addEventListener('click',closeM);
+  mnav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeM);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
+  // reveal on scroll
+  var revs=[].slice.call(document.querySelectorAll('.rev'));
+  if(rm){revs.forEach(function(r){r.classList.add('in');});}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12});
+    revs.forEach(function(r){io.observe(r);});
+  }
+  // count-up stats
+  var stats=[].slice.call(document.querySelectorAll('.st-n'));
+  function countUp(el){
+    var n=+el.getAttribute('data-n'),sup=el.querySelector('sup'),suf=sup?sup.outerHTML:'',dur=1100,t0=null;
+    if(rm){el.innerHTML=n+suf;return;}
+    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),v=Math.round(n*(1-Math.pow(1-p,3)));el.innerHTML=v+suf;if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  }
+  var sio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){countUp(en.target);sio.unobserve(en.target);}});},{threshold:.5});
+  stats.forEach(function(s){sio.observe(s);});
+  // ---- delight: custom cursor + warm spotlight + magnetic + tilt (fine pointer & motion-OK only) ----
+  var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if(!rm && fine){
+    var dot=document.getElementById('cdot'),ring=document.getElementById('cring'),root=document.documentElement;
+    document.body.classList.add('cursor-on');
+    var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+    addEventListener('pointermove',function(e){
+      mx=e.clientX;my=e.clientY;
+      dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
+      root.style.setProperty('--mx',mx+'px');root.style.setProperty('--my',my+'px');
+    },{passive:true});
+    (function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button,.proj,.cert,.snap,.st').forEach(function(el){
+      el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});
+      el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});
+    });
+    document.querySelectorAll('.btn').forEach(function(b){
+      b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.25+'px,'+(e.clientY-r.top-r.height/2)*.35+'px)';});
+      b.addEventListener('pointerleave',function(){b.style.transform='';});
+    });
+    document.querySelectorAll('.proj').forEach(function(c){
+      c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();var px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(900px) rotateY('+px*4+'deg) rotateX('+(-py*4)+'deg) translateY(-3px)';});
+      c.addEventListener('pointerleave',function(){c.style.transform='';});
+    });
+  }
+})();
 </script>
 </body>
 </html>
