@@ -1,341 +1,640 @@
 <!doctype html>
+<!-- Al Schramm — "Midnight Lens" sample. Lens engine adapted from Operations Studio v1.9. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Al Schramm — operations and people leader who ships software. A decade in high-volume logistics, plus dashboards, AI tools, and self-hosted systems built on the side.">
+<link rel="icon" href="data:,">
 <title>Al Schramm — Operations Leader & Builder</title>
+<meta name="theme-color" content="#060A18">
+<meta property="og:title" content="Al Schramm — Operations Leader &amp; Builder">
+<meta property="og:description" content="People &amp; operations leader who ships software.">
+<meta name="description" content="Al Schramm, PHR — people & operations leader who ships software.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,600;1,9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F6F2E9;--paper2:#EFE9DC;--paper3:#E7DFCD;
-  --ink:#1C1A16;--ink2:#3A362E;--mut:#615A4D;
-  --rust:#A93A1F;--rust2:#7E2E16;--gold:#9A7B40;--line:#D8CFBC;--line2:#C9BFA8;
-  --disp:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif;
-  --maxw:1040px;
+  --void:#060A18; --ash:#AEB9D6; --frost:#EAF2FF; --graphite:#56638A;
+  --signal:#5CE1FF; --violet:#8B7CFF;
+  --hair:rgba(140,190,255,.16);
+  --font:'Sora',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --margin:110px; --max:1400px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 1.6rem;position:relative}
-a{color:inherit;text-decoration:none}
-img{max-width:100%}
-:focus-visible{outline:2.5px solid var(--rust);outline-offset:3px;border-radius:2px}
-.skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--paper);padding:.6rem 1rem;z-index:200;border-radius:0 0 4px 0}
-.skip:focus{left:0}
-/* shared type */
-.eye{font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:.9rem}
-.h2{font-family:var(--disp);font-weight:900;font-size:clamp(2rem,4.6vw,3.4rem);letter-spacing:-.01em;line-height:1.02;margin-bottom:1.1rem}
-.h2 em{font-style:italic;color:var(--rust)}
-.lede{color:var(--mut);max-width:62ch;font-size:1.05rem}
-/* nav */
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.6rem;background:rgba(246,242,233,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.brand{font-family:var(--disp);font-weight:900;font-size:1.2rem}
-.nlinks{display:flex;gap:1.8rem;font-size:.85rem;align-items:center}
-.nlinks a{color:var(--ink2);position:relative;padding:.2rem 0}
-.nlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1.5px;background:var(--rust);transition:right .25s}
-.nlinks a:hover::after,.nlinks a:focus-visible::after{right:0}
-.ncta{font-size:.82rem;border:1.5px solid var(--ink);padding:.5rem 1rem;border-radius:2px;font-weight:600}
-.ncta:hover{background:var(--ink);color:var(--paper)}
-.burger{display:none;background:none;border:1.5px solid var(--ink);color:var(--ink);padding:.45rem .7rem;border-radius:2px;font-size:.85rem;font-weight:600;cursor:pointer}
-.mnav{display:none;position:fixed;inset:0 0 0 auto;width:min(80vw,300px);background:var(--paper2);border-left:1px solid var(--line);z-index:120;padding:5rem 2rem;flex-direction:column;gap:1.4rem}
-.mnav.open{display:flex}
-.mnav a{font-family:var(--disp);font-size:1.4rem;font-weight:700}
-.mnav .close{position:absolute;top:1.2rem;right:1.4rem;font-size:1.6rem;background:none;border:none;cursor:pointer;color:var(--ink)}
-.scrim{display:none;position:fixed;inset:0;background:rgba(28,26,22,.4);z-index:110}
-.scrim.open{display:block}
-/* hero */
-.hero{padding:5rem 0 3rem}
-.kicker{display:flex;align-items:center;gap:1rem;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:1.6rem}
-.kicker::after{content:"";flex:1;height:1px;background:var(--line)}
-.kicker .now{color:var(--rust);font-weight:700;display:inline-flex;align-items:center;gap:.45rem}
-.kicker .now::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rust)}
-h1{font-family:var(--disp);font-weight:900;font-size:clamp(3.2rem,11vw,7rem);line-height:.9;letter-spacing:-.02em}
-h1 em{font-style:italic;color:var(--rust)}
-.subhead{font-family:var(--disp);font-style:italic;font-size:clamp(1.2rem,2.6vw,1.75rem);color:var(--ink2);margin:1.2rem 0 1.4rem;max-width:32ch}
-.hsub{color:var(--mut);max-width:60ch;font-size:1.1rem}
-.hsub b{color:var(--ink);font-weight:600}
-.acts{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
-.btn{font-size:.92rem;font-weight:600;padding:.85rem 1.5rem;border-radius:2px;transition:transform .15s,background .2s,color .2s}
-.bp{background:var(--ink);color:var(--paper)}.bp:hover{transform:translateY(-2px)}
-.bg{border:1.5px solid var(--ink);color:var(--ink)}.bg:hover{background:var(--ink);color:var(--paper)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:3.4rem;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
-.st{padding:1.5rem 1rem;border-right:1px solid var(--line)}
-.st:last-child{border-right:none}
-.st-n{font-family:var(--disp);font-weight:900;font-size:clamp(2.2rem,5vw,3rem);line-height:1;color:var(--ink)}
-.st-n sup{color:var(--rust);font-size:.55em;vertical-align:super}
-.st-l{font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin-top:.5rem}
-section{padding:4.5rem 0}
-.alt{background:var(--paper2)}
-/* about */
-.about-grid{display:grid;grid-template-columns:1.5fr .85fr;gap:3rem;align-items:start}
-.ap{color:var(--ink2);margin-bottom:1rem;font-size:1.02rem}.ap b{color:var(--ink);font-weight:600}
-.dropcap::first-letter{font-family:var(--disp);font-weight:900;font-size:3.6rem;float:left;line-height:.78;margin:.12rem .55rem 0 0;color:var(--rust)}
-.snap{background:var(--paper);border:1px solid var(--line2);padding:1.6rem;border-radius:3px;box-shadow:0 1px 0 var(--line)}
-.snap-name{font-family:var(--disp);font-weight:700;font-size:1.2rem}
-.snap-role{font-size:.85rem;color:var(--mut);margin-bottom:.9rem}
-.srow{display:flex;justify-content:space-between;gap:1rem;font-size:.9rem;padding:.55rem 0;border-bottom:1px solid var(--line)}
-.srow .k{color:var(--mut)}.srow:last-child{border:none}
-.srow .v{text-align:right;font-weight:500}
-.srow .av{color:var(--rust);font-weight:600}
-/* experience */
-.exp{padding:1.8rem 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:.55fr 2fr;gap:1.5rem}
-.exp:last-child{border-bottom:none}
-.exp-when{font-size:.84rem;color:var(--mut);font-weight:500;padding-top:.3rem}
-.exp-t{font-family:var(--disp);font-weight:700;font-size:1.3rem;transition:color .2s}
-.exp:hover .exp-t{color:var(--rust)}
-.exp-co{color:var(--rust);font-size:.88rem;font-weight:600;margin:.1rem 0 .7rem}
-.exp-list{list-style:none}
-.exp-list li{color:var(--ink2);font-size:.96rem;padding-left:1.3rem;position:relative;margin-bottom:.5rem}
-.exp-list li::before{content:"—";position:absolute;left:0;color:var(--rust);font-weight:700}
-.exp-list b{color:var(--ink);font-weight:600}
-/* work */
-.pgrid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:2rem}
-.proj{padding:1.7rem;border-bottom:1px solid var(--line);border-right:1px solid var(--line);transition:background .2s}
-.proj:nth-child(2n){border-right:none}
-.proj:hover{background:var(--paper3)}
-.proj-h{display:flex;justify-content:space-between;align-items:baseline}
-.proj-idx{font-family:var(--disp);font-weight:900;font-size:1.5rem;color:var(--gold)}
-.proj-tag{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:600}
-.proj-name{font-family:var(--disp);font-weight:700;font-size:1.22rem;margin:.5rem 0 .55rem}
-.proj-desc{color:var(--ink2);font-size:.92rem;margin-bottom:.9rem}
-.stack{display:flex;flex-wrap:wrap;gap:.45rem}
-.tk{font-size:.72rem;color:var(--mut);border:1px solid var(--line2);padding:.2rem .55rem;border-radius:2px;background:var(--paper)}
-.proj-note{font-size:.82rem;color:var(--mut);font-style:italic;margin-top:1.6rem;font-family:var(--disp)}
-/* skills */
-.skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:2rem}
-.skill-col h3{font-family:var(--disp);font-weight:700;font-size:1.15rem;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--ink)}
-.skill-list{display:flex;flex-wrap:wrap;gap:.5rem}
-.sk{font-size:.86rem;border:1px solid var(--line2);padding:.35rem .7rem;border-radius:2px;background:var(--paper);color:var(--ink2)}
-.sk.k{border-color:var(--rust);color:var(--rust);font-weight:600}
-/* certs */
-.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem}
-.cert{border:1px solid var(--line2);padding:1.4rem;text-align:center;border-radius:3px;background:var(--paper);position:relative;transition:transform .15s}
-.cert:hover{transform:translateY(-3px)}
-.cert .cg{font-family:var(--disp);font-weight:900;font-size:1.9rem;color:var(--rust)}
-.cert .cn{font-weight:600;margin-top:.5rem}.cert .cm{font-size:.74rem;color:var(--mut);margin-top:.25rem}
-.cert.feat{border:2px solid var(--ink)}
-.ribbon{position:absolute;top:.6rem;right:.6rem;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;background:var(--rust);color:var(--paper);padding:.15rem .4rem;border-radius:2px;font-weight:700}
-/* contact */
-.contact{text-align:center;background:var(--ink);color:var(--paper)}
-.contact .eye{color:#E8A893}
-.contact .h2{color:var(--paper)}.contact .h2 em{color:#E8A893}
-.contact .lede{color:#C9C2B3;margin:0 auto}
-.crow{display:flex;gap:1.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.8rem;font-size:.98rem;font-weight:500}
-.crow a{color:#E8A893;border-bottom:1.5px solid transparent;padding-bottom:2px}
-.crow a:hover{border-color:#E8A893}
-.foot{font-size:.82rem;color:#9c9486;margin-top:2.8rem;font-style:italic;font-family:var(--disp)}
-/* ---- delight layer (fine-pointer + motion-OK only; native cursor preserved otherwise) ---- */
-.spotlight{position:fixed;inset:0;pointer-events:none;z-index:90;opacity:0;transition:opacity .5s;mix-blend-mode:multiply;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),rgba(169,58,31,.10),rgba(154,123,64,.05) 42%,transparent 66%)}
-body.cursor-on .spotlight{opacity:1}
-.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:300;border-radius:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .3s,width .18s,height .18s,background .18s,border-color .18s}
-.cursor-dot{width:7px;height:7px;background:var(--rust)}
-.cursor-ring{width:32px;height:32px;border:1.5px solid var(--rust)}
-body.cursor-on .cursor-dot,body.cursor-on .cursor-ring{opacity:1}
-body.cursor-on.hovering .cursor-ring{width:54px;height:54px;background:rgba(169,58,31,.07);border-color:var(--rust2)}
-body.cursor-on.hovering .cursor-dot{opacity:.4}
-body.cursor-on,body.cursor-on a,body.cursor-on button{cursor:none}
-.btn{will-change:transform}
-.proj{transition:background .2s,transform .25s ease;will-change:transform}
-/* hero name underline draws on load */
-h1 em{position:relative}
-h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.01em;height:.08em;background:var(--rust);border-radius:3px;transform:scaleX(0);transform-origin:left;animation:hdraw 1.1s .45s cubic-bezier(.6,.1,.2,1) forwards}
-@keyframes hdraw{to{transform:scaleX(1)}}
-/* footer Claude nod — looping ink sweep */
-.foot .claude{color:#E8A893;font-style:normal;font-weight:600;position:relative;white-space:nowrap}
-.foot .claude::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1.5px;background:#E8A893;transform-origin:left;animation:sweep 3.6s ease-in-out infinite}
-@keyframes sweep{0%,100%{transform:scaleX(0);transform-origin:left}45%{transform:scaleX(1);transform-origin:left}55%{transform:scaleX(1);transform-origin:right}99%{transform:scaleX(0);transform-origin:right}}
-/* reveal */
-.rev{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
-.rev.in{opacity:1;transform:none}
-@media(max-width:780px){
-  .nlinks{display:none}.burger{display:block}
-  .about-grid{grid-template-columns:1fr;gap:2rem}
-  .exp{grid-template-columns:1fr;gap:.5rem}
-  .pgrid{grid-template-columns:1fr}.proj{border-right:none}
-  .stats{grid-template-columns:1fr 1fr}.st:nth-child(2n){border-right:none}.st:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .cgrid{grid-template-columns:1fr 1fr}.skill-grid{grid-template-columns:1fr;gap:1.8rem}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--void);color:var(--ash);font:400 17px/1.45 var(--font);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--signal);outline-offset:4px}
+.wrap{width:100%;max-width:calc(var(--max) + 2*var(--margin));margin:0 auto;padding-left:var(--margin);padding-right:var(--margin)}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--frost);color:#000;padding:9px 14px}
+.skip:focus{left:9px;top:9px}
+#lens{position:fixed;inset:0;width:100%;height:100%;z-index:40;pointer-events:none;opacity:0;transition:opacity .8s linear}
+#lens.on{opacity:1}
+.top{position:fixed;top:0;left:0;right:0;height:72px;z-index:50;background:linear-gradient(rgba(6,10,24,.92),rgba(6,10,24,.75));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.top .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{display:flex;white-space:nowrap;align-items:center;gap:10px;color:var(--frost);text-decoration:none;font-size:15px;font-weight:600;letter-spacing:.02em}
+.brand i{width:12px;height:12px;border-radius:3px;background:var(--signal);transform:rotate(45deg)}
+.tagline{font:400 12px var(--mono);color:var(--ash);letter-spacing:.08em;text-transform:uppercase}
+.top .right{display:flex;align-items:center;gap:22px}
+.cta{display:inline-block;border:1px solid var(--signal);color:var(--signal);border-radius:9999px;padding:0 24px;line-height:38px;font:400 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.cta:hover{background:var(--signal);color:var(--void)}
+.burger{width:44px;height:44px;margin-right:-8px;background:none;border:0;padding:0;cursor:pointer;position:relative}
+.burger::before,.burger::after{content:'';position:absolute;left:8px;right:8px;height:1.5px;background:var(--frost)}
+.burger::before{top:16px}.burger::after{bottom:16px;left:18px}
+.eyebrow,.index,.meta,.ghost{font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.eyebrow{font-size:12px;color:var(--signal);margin:0 0 26px}
+.display{margin:0;color:var(--frost);font-weight:600;font-size:clamp(44px,9.6vw,176px);line-height:.98;letter-spacing:-.045em}
+.display em{font-style:normal;font-weight:300;color:var(--signal)}
+.title{margin:0 0 26px;color:var(--frost);font-weight:600;font-size:clamp(36px,4.8vw,80px);line-height:.98;letter-spacing:-.035em}
+.heading{margin:0 0 30px;color:var(--frost);font-weight:300;font-size:clamp(36px,4.6vw,68px);line-height:1.05;letter-spacing:-.03em}
+.heading b{font-weight:600}
+.sub{margin:0 0 18px;color:var(--frost);font-weight:400;font-size:22px;line-height:1.2}
+.lead{margin:0;max-width:580px;font-size:17px;line-height:1.5;color:var(--ash)}
+.lead b{color:var(--frost);font-weight:600}
+.meta{margin:0;font-size:11px;line-height:1.4;color:var(--graphite)}
+.ghost{color:var(--frost);text-decoration:none;font-size:12px}
+.ghost:hover,.ghost:focus-visible{color:var(--signal)}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:140px;padding-bottom:80px}
+.hero-foot{display:grid;grid-template-columns:minmax(0,600px) auto;justify-content:space-between;align-items:end;gap:36px;margin-top:40px}
+.hero-links{display:flex;flex-wrap:wrap;gap:28px;justify-content:flex-end}
+.hero .meta{margin-top:22px}
+.stats{display:flex;gap:56px;margin-top:44px;border-top:1px solid var(--hair);padding-top:22px}
+.stats .n{display:block;color:var(--frost);font-weight:300;font-size:44px;letter-spacing:-.03em;line-height:1}
+.stats .l{font:400 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--graphite)}
+.rest-point{position:absolute;right:18%;top:40%;width:1px;height:1px}
+.systems{padding-top:100px}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:22px;border-top:1px solid var(--hair);padding-top:22px}
+.section-head .eyebrow{margin:0}
+.row{display:grid;grid-template-columns:1.2fr .8fr;gap:65px;align-items:center;min-height:100vh;min-height:100svh}
+.row.flip{grid-template-columns:.8fr 1.2fr}
+.row.flip .copy{order:2}
+.index{margin:0 0 20px;font-size:12px;color:var(--signal)}
+.tags{list-style:none;margin:26px 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tags li{border:1px solid var(--hair);border-radius:9999px;padding:6px 13px;font:400 12px var(--mono);color:var(--ash)}
+.copy .meta{margin-top:20px}
+.slot{position:relative;width:100%;aspect-ratio:1/1}
+.snap-point{position:absolute;left:50%;top:50%;width:1px;height:1px}
+.fallback{display:none}
+.no-webgl .fallback{display:block;position:absolute;inset:8%;border-radius:50%;background:#0A1230 center/cover no-repeat}
+.band{padding-top:160px;padding-bottom:40px}
+.xp{list-style:none;margin:60px 0 0;padding:0}
+.xp li{display:grid;grid-template-columns:220px 1fr 1.3fr;gap:40px;border-top:1px solid var(--hair);padding:30px 0}
+.xp li:last-child{border-bottom:1px solid var(--hair)}
+.xp .when{font:400 12px var(--mono);letter-spacing:.08em;color:var(--graphite);text-transform:uppercase}
+.xp h3{margin:0 0 6px;color:var(--frost);font-weight:600;font-size:22px;letter-spacing:-.01em}
+.xp .org{font:400 12px var(--mono);letter-spacing:.08em;color:var(--signal);text-transform:uppercase}
+.xp p{margin:0;font-size:15px;line-height:1.5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:65px;margin-top:60px}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{border:1px solid var(--hair);border-radius:9999px;padding:7px 14px;font-size:14px}
+.certs{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:60px}
+.certs div{border-top:1px solid var(--signal);padding-top:16px}
+.certs b{display:block;color:var(--frost);font-weight:300;font-size:40px;letter-spacing:-.03em;margin-bottom:8px}
+.certs h4{margin:0 0 4px;color:var(--frost);font-weight:600;font-size:16px}
+.certs p{margin:0;font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+.foot{padding-top:160px;padding-bottom:40px}
+.foot-big{margin:0 0 40px;color:var(--frost);font-weight:300;font-size:clamp(40px,6vw,100px);line-height:1;letter-spacing:-.04em}
+.foot-big b{font-weight:600;color:var(--signal)}
+.contact{display:flex;flex-wrap:wrap;gap:34px;margin-bottom:80px}
+.contact a{color:var(--frost);text-decoration:none;font-size:20px;border-bottom:1px solid var(--hair);padding-bottom:4px}
+.contact a:hover{border-color:var(--signal)}
+.foot-line{display:flex;justify-content:space-between;flex-wrap:wrap;gap:22px;border-top:1px solid var(--hair);padding-top:22px}
+.menu{position:fixed;inset:0;z-index:60;background:var(--void);display:flex;flex-direction:column;justify-content:center;padding:0 var(--margin)}
+.menu[hidden]{display:none}
+.menu nav a{display:block;padding:8px 0;color:var(--frost);text-decoration:none;font-weight:600;font-size:clamp(40px,7vw,88px);line-height:1;letter-spacing:-.04em}
+.menu nav a:hover,.menu nav a:focus-visible{color:var(--signal)}
+.menu .close{position:absolute;top:16px;right:var(--margin);background:none;border:0;padding:12px 0;cursor:pointer}
+.menu .meta{margin-top:40px}
+@media (max-width:1100px){.certs{grid-template-columns:1fr 1fr}.xp li{grid-template-columns:160px 1fr}.xp li p{grid-column:2}}
+@media (max-width:900px){
+  :root{--margin:24px}
+  .tagline{display:none}
+  .hero-foot{grid-template-columns:1fr}.hero-links{justify-content:flex-start}
+  .stats{gap:28px;flex-wrap:wrap}.stats .n{font-size:34px}
+  .rest-point{right:30%;top:28%}
+  .row,.row.flip{grid-template-columns:1fr;gap:36px;min-height:auto;padding:100px 0 40px}
+  .row.flip .copy{order:0}
+  .slot{max-width:440px;margin:0 auto}
+  .grid2{grid-template-columns:1fr}
+  .xp li{grid-template-columns:1fr;gap:10px}.xp li p{grid-column:auto}
 }
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}.rev{opacity:1;transform:none}.spotlight,.cursor-dot,.cursor-ring{display:none}h1 em::after{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){#lens{transition:none}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="spotlight" id="spotlight" aria-hidden="true"></div>
-<div class="cursor-ring" id="cring" aria-hidden="true"></div>
-<div class="cursor-dot" id="cdot" aria-hidden="true"></div>
-<nav>
-  <a class="brand" href="#top">Al Schramm</a>
-  <ul class="nlinks">
-    <li><a href="#about">About</a></li><li><a href="#exp">Experience</a></li>
-    <li><a href="#work">Work</a></li><li><a href="#skills">Skills</a></li><li><a href="#certs">Credentials</a></li>
-    <li><a class="ncta" href="mailto:schramm.al@outlook.com?subject=Resume%20request">Résumé</a></li>
-  </ul>
-  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">Menu</button>
-</nav>
-<div class="scrim" id="scrim"></div>
-<aside class="mnav" id="mnav" aria-label="Mobile navigation">
-  <button class="close" id="mclose" aria-label="Close menu">&times;</button>
-  <a href="#about">About</a><a href="#exp">Experience</a><a href="#work">Work</a>
-  <a href="#skills">Skills</a><a href="#certs">Credentials</a>
-  <a href="mailto:schramm.al@outlook.com?subject=Resume%20request">Résumé on Request</a>
-</aside>
-
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><i aria-hidden="true"></i>Al Schramm</a>
+    <span class="tagline">Operations · People · Software</span>
+    <div class="right">
+      <a class="cta" href="#contact">Get in touch</a>
+      <button class="burger" type="button" aria-label="Open menu" aria-controls="menu" aria-expanded="false"></button>
+    </div>
+  </div>
+</header>
+<div class="menu" id="menu" hidden role="dialog" aria-modal="true" aria-label="Menu">
+  <button class="close ghost" type="button">Close</button>
+  <nav>
+    <a href="#systems">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#stack">Stack</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <p class="meta">Al Schramm, PHR · Greater Philadelphia</p>
+</div>
 <main id="main">
-<header class="hero" id="top"><div class="wrap">
-  <div class="kicker"><span class="now">Currently</span> HR Specialist, Netflix House — King of Prussia, PA</div>
-  <h1>Al <em>Schramm</em></h1>
-  <p class="subhead">People &amp; operations leader, by day. Builder of tools, by night.</p>
-  <p class="hsub">A decade leading <b>high-volume logistics and HR</b> at Amazon, Walmart &amp; FedEx — then quietly shipping the <b>dashboards, AI tools, and self-hosted systems</b> that make the floor run smarter.</p>
-  <div class="acts"><a class="btn bp" href="#work">View the Work</a><a class="btn bg" href="mailto:schramm.al@outlook.com?subject=Resume%20request">Résumé on Request</a></div>
-  <div class="stats">
-    <div class="st"><div class="st-n" data-n="10"><sup>+</sup></div><div class="st-l">Years in Operations</div></div>
-    <div class="st"><div class="st-n" data-n="500"><sup>+</sup></div><div class="st-l">Associates Led</div></div>
-    <div class="st"><div class="st-n" data-n="8"><sup>+</sup></div><div class="st-l">Tools Shipped</div></div>
-    <div class="st"><div class="st-n" data-n="3"></div><div class="st-l">Fortune-500 Orgs</div></div>
-  </div>
-</div></header>
-
-<section id="about"><div class="wrap"><div class="about-grid">
-  <div class="rev">
-    <div class="eye">About</div>
-    <h2 class="h2">Operator by day. <em>Builder</em> by night.</h2>
-    <p class="ap dropcap">PHR-certified operations and people leader with <b>10+ years</b> running high-volume logistics, distribution, and fulfillment at <b>Amazon, Walmart, and FedEx</b>. The day job is developing front-line leaders and driving operational excellence through Lean / Six Sigma — at real scale.</p>
-    <p class="ap">The after-hours habit is <b>writing software</b> — dashboards, browser apps, desktop tools, and AI agents that replace the spreadsheets and manual reports nobody enjoyed. Equally at home coaching a floor team through a brutal shift or wiring up a dashboard at 11pm. Recently <b>AI Fluency certified through Anthropic Academy</b>, and a believer in standard work, clean data, and self-hosted AI.</p>
-  </div>
-  <div class="snap rev">
-    <div class="snap-name">Al Schramm, PHR</div><div class="snap-role">Operations &amp; People Leader</div>
-    <div class="srow"><span class="k">Based in</span><span class="v">Greater Philadelphia</span></div>
-    <div class="srow"><span class="k">Focus</span><span class="v">Ops · People · Quality</span></div>
-    <div class="srow"><span class="k">Builds with</span><span class="v">Python · FastAPI · AI</span></div>
-    <div class="srow"><span class="k">Status</span><span class="v">Employed — Netflix House</span></div>
-  </div>
-</div></div></section>
-
-<section id="exp" class="alt"><div class="wrap">
-  <div class="rev"><div class="eye">Experience</div><h2 class="h2">Where I've <em>led.</em></h2></div>
-  <div class="rev">
-    <div class="exp"><div class="exp-when">Jul 2026 — Present</div><div><div class="exp-t">Human Resources Specialist</div><div class="exp-co">Netflix House · King of Prussia</div><ul class="exp-list"><li>People operations support for Netflix House's newest experiential venue — onboarding, employee relations, and day-to-day HR for a brand-new team standing up a first-of-its-kind location.</li></ul></div></div>
-    <div class="exp"><div class="exp-when">Jun 2024 — Jul 2026</div><div><div class="exp-t">People Operations Manager</div><div class="exp-co">Walmart</div><ul class="exp-list"><li>Lead a <b>50+ associate team across five departments</b> — coaching supervisors on performance, accountability, and safety in a high-volume environment.</li><li>Served as <b>Acting Site Manager for 8 months</b> — owning staffing, scheduling, escalations, safety compliance, and regional leadership reporting through a full leadership vacancy.</li><li>Built a <b>leadership bootcamp</b> to grow hourly associates into leaders — promoted 3 Team Leads to Area Manager and cut regional fill time by <b>50%</b>.</li><li>Applied Lean tools to standardize workflows and reduce waste — sustained <b>zero lost-time safety incidents</b> across shifts.</li></ul></div></div>
-    <div class="exp"><div class="exp-when">Jan 2021 — Jun 2024</div><div><div class="exp-t">HR Business Partner II</div><div class="exp-co">Amazon · Philadelphia Region</div><ul class="exp-list"><li>People partner for <b>500+ associates</b> across the final-mile network — coaching managers, driving performance, and owning regional engagement.</li><li>Rebuilt engagement at a struggling delivery station through interactive displays and recognition programs — connection scores surged; promoted to lead regional engagement.</li><li>Selected <b>twice</b> for the Employee Relations Jump Team (2023) for high-stakes labor campaigns.</li><li>Earned the Global Delivery Services <b>Amazon Excellence Award</b> (2024).</li></ul></div></div>
-    <div class="exp"><div class="exp-when">Dec 2019 — Jan 2021</div><div><div class="exp-t">Operations Manager — Fulfillment &amp; Logistics</div><div class="exp-co">Amazon · Philadelphia Region</div><ul class="exp-list"><li>Managed <b>300+ associates</b> across multi-shift fulfillment operations — coaching front-line leads and applying Lean / Six Sigma to drive throughput and safety.</li><li>Supported <b>six delivery station launches</b> across the region — onboarding, culture-setting, and operational standup for new teams at scale.</li></ul></div></div>
-    <div class="exp"><div class="exp-when">Earlier Career</div><div><div class="exp-t">Operations Leadership</div><div class="exp-co">FedEx · Greater Philadelphia</div><ul class="exp-list"><li>Built foundational team leadership and logistics operations skills in high-volume, fast-paced delivery environments.</li></ul></div></div>
-  </div>
-</div></section>
-
-<section id="work"><div class="wrap">
-  <div class="rev"><div class="eye">Selected Work</div><h2 class="h2">Tools I've <em>designed &amp; shipped.</em></h2>
-  <p class="lede">Real software solving real operational problems — mostly Python, FastAPI, HTMX, and a refusal to accept "that's just how the spreadsheet works." Specifics generalized; happy to demo any of it.</p></div>
-  <div class="pgrid rev">
-    <div class="proj"><div class="proj-h"><span class="proj-idx">01</span><span class="proj-tag">Ops Tooling</span></div><div class="proj-name">Project Pipeline Dashboard</div><p class="proj-desc">Turns a sprawling project-planning spreadsheet into a fast, filterable single source of truth — filter the network pipeline by site or region and instantly see go-live dates, execution status, and contact lookups. No database: an atomic JSON snapshot with one-click rollback. Tolerant column-mapping survives messy spreadsheet headers, and it ships as both a live app and a baked static build.</p><div class="stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">HTMX</span><span class="tk">Jinja</span></div></div>
-    <div class="proj"><div class="proj-h"><span class="proj-idx">02</span><span class="proj-tag">Browser App</span></div><div class="proj-name">Field Quality Audit App</div><p class="proj-desc">A zero-install, browser-only auditing app rolled out org-wide. Identity auto-fills from single sign-on, with live webcam capture and in-browser image compression, plus per-device audit history in IndexedDB. Generates a ready-to-send email draft so a human reviews and sends — it never auto-sends. Runs fully client-side, no server to maintain.</p><div class="stack"><span class="tk">Vanilla JS</span><span class="tk">IndexedDB</span><span class="tk">WebRTC</span><span class="tk">SSO</span></div></div>
-    <div class="proj"><div class="proj-h"><span class="proj-idx">03</span><span class="proj-tag">AI · Agents</span></div><div class="proj-name">Autonomous Agent Relay</div><p class="proj-desc">An experimental channel letting two autonomous AI coding agents on separate machines coordinate on shared work — a file-drop mailbox, polling cadence, presence pings, and resume/handoff so long-running tasks survive restarts. My playground for agentic, self-hosted AI.</p><div class="stack"><span class="tk">Python</span><span class="tk">Agent Orchestration</span><span class="tk">IPC</span></div></div>
-    <div class="proj"><div class="proj-h"><span class="proj-idx">04</span><span class="proj-tag">Freelance · AI</span></div><div class="proj-name">AI Operations Command Center</div><p class="proj-desc">A turnkey ops platform delivered for a small-business client: customer-facing site, quote intake with lead-time guardrails, a PO-ready invoice generator with Excel/CSV export, service-area classification, and seams wired for AI-assisted email and customer service.</p><div class="stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">AI Integration</span><span class="tk">Invoicing</span></div></div>
-    <div class="proj"><div class="proj-h"><span class="proj-idx">05</span><span class="proj-tag">Integration</span></div><div class="proj-name">Workforce Scheduling Dashboard</div><p class="proj-desc">A self-hosted dashboard that authenticates against a workforce-management SaaS, replays its session calls, and pulls Schedules, Timecards, Roster, and Accruals into custom reports the vendor UI never offered — with keep-alive pings, graceful session-expiry handling, and a disk-snapshot fallback so it still renders the last good data when a session expires.</p><div class="stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">Session Auth</span><span class="tk">Reporting</span></div></div>
-    <div class="proj"><div class="proj-h"><span class="proj-idx">06</span><span class="proj-tag">Ops Tooling</span></div><div class="proj-name">Operations Command Center</div><p class="proj-desc">A real-time "single pane of glass" for floor operations — live picking and closeout status, exception queues, and daily execution metrics pulled from operational exports and rendered for at-a-glance decisions. Portable and zero-install, auto-detecting its site from the operator's login so one build runs anywhere.</p><div class="stack"><span class="tk">Python</span><span class="tk">Dashboards</span><span class="tk">Data Viz</span></div></div>
-    <div class="proj"><div class="proj-h"><span class="proj-idx">07</span><span class="proj-tag">Privacy-first</span></div><div class="proj-name">Warehouse Productivity Analytics</div><p class="proj-desc">Aggregate workload analytics with a privacy-first spine: raw values are hashed before storage, person and timestamp fields are never persisted, and only aggregate-safe metrics are rendered. Surfaces overdue and due-today queues, zone distribution, and exception lists.</p><div class="stack"><span class="tk">Python</span><span class="tk">FastAPI</span><span class="tk">SQLite</span><span class="tk">Privacy-by-design</span></div></div>
-    <div class="proj"><div class="proj-h"><span class="proj-idx">08</span><span class="proj-tag">Desktop</span></div><div class="proj-name">Dual Workspace</div><p class="proj-desc">A desktop app running two fully isolated Microsoft 365 accounts in one window — each pane independently switches between Teams, Outlook, and Calendar, with separate profiles, theming, and live notification badges. Built on WebView2.</p><div class="stack"><span class="tk">PowerShell</span><span class="tk">WebView2</span><span class="tk">.NET</span></div></div>
-  </div>
-  <p class="proj-note">Eight shipped tools and counting — every one born from a real operational headache.</p>
-</div></section>
-
-<section id="skills" class="alt"><div class="wrap">
-  <div class="rev"><div class="eye">The Stack</div><h2 class="h2">Tools of the <em>trade.</em></h2></div>
-  <div class="skill-grid rev">
-    <div class="skill-col">
-      <h3>The Build Stack</h3>
-      <div class="skill-list">
-        <span class="sk k">Python</span><span class="sk k">FastAPI</span><span class="sk">HTMX</span><span class="sk">Jinja</span><span class="sk">JavaScript</span><span class="sk">IndexedDB</span><span class="sk">WebRTC</span><span class="sk">SQLite</span><span class="sk">PowerShell</span><span class="sk">WebView2</span><span class="sk">.NET</span><span class="sk k">AI Agents</span><span class="sk">Self-hosted AI</span><span class="sk">Tailwind</span><span class="sk">Git</span>
+  <section class="hero wrap" id="top">
+    <p class="eyebrow">People &amp; operations leader · Builder</p>
+    <h1 class="display">Operator<br>by day.<br><em>Builder</em> by night.</h1>
+    <div class="hero-foot">
+      <p class="lead">A decade leading high-volume logistics and HR at <b>Amazon, Walmart &amp; FedEx</b>, plus the dashboards, AI tools and self-hosted systems that make the floor run smarter.</p>
+      <div class="hero-links">
+        <a class="ghost" href="#systems">See the work</a>
+        <a class="ghost" href="#contact" id="featured-link">Résumé on request ↗</a>
       </div>
     </div>
-    <div class="skill-col">
-      <h3>The Human Stack</h3>
-      <div class="skill-list">
-        <span class="sk k">Team Development &amp; Coaching</span><span class="sk">Labor Planning</span><span class="sk">KPI &amp; Workforce Analytics</span><span class="sk">Employee Relations &amp; Investigations</span><span class="sk">Standard Work / SOPs</span><span class="sk">Safety Culture &amp; Compliance</span><span class="sk k">Lean / Six Sigma</span><span class="sk">Change Management</span>
-      </div>
+    <div class="stats">
+      <div><div class="n">10+</div><div class="l">Years in operations</div></div>
+      <div><div class="n">500+</div><div class="l">Associates supported</div></div>
+      <div><div class="n">8</div><div class="l">Tools shipped</div></div>
+      <div><div class="n">3</div><div class="l">Fortune 500 orgs</div></div>
     </div>
-  </div>
-</div></section>
-
-<section id="certs"><div class="wrap">
-  <div class="rev"><div class="eye">Credentials</div><h2 class="h2">Marks <em>earned.</em></h2></div>
-  <div class="cgrid rev">
-    <div class="cert feat"><span class="ribbon">New · 2026</span><div class="cg">AI</div><div class="cn">AI Fluency</div><div class="cm">Anthropic Academy · 2026</div></div>
-    <div class="cert"><div class="cg">PHR</div><div class="cn">Professional in HR</div><div class="cm">HRCI · 2023</div></div>
-    <div class="cert"><div class="cg">6S</div><div class="cn">Six Sigma Yellow Belt</div><div class="cm">2024</div></div>
-    <div class="cert"><div class="cg">ML</div><div class="cn">Machine Learning Spec.</div><div class="cm">Stanford · Coursera — In Progress</div></div>
-  </div>
-</div></section>
-
-<section id="contact" class="contact"><div class="wrap rev">
-  <div class="eye" style="color:#E8A893">Get in touch</div>
-  <h2 class="h2">Let's build the <em>next thing.</em></h2>
-  <p class="lede">Always happy to talk ops, HR, or the tools I build on the side. Greater Philadelphia Area.</p>
-  <div class="crow">
-    <a href="mailto:schramm.al@outlook.com">schramm.al@outlook.com</a>
-    <a href="tel:2155342155">215.534.2155</a>
-    <a href="https://linkedin.com/in/alschr" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://schrammal.github.io/Alschr" target="_blank" rel="noopener">GitHub Portfolio</a>
-  </div>
-  <p class="foot">Designed &amp; built from scratch — no frameworks, no templates, just me and a little help from <span class="claude">Claude</span>. © 2026 Al Schramm</p>
-</div></section>
+    <p class="meta" id="count-line"></p>
+    <span class="rest-point" data-rest-point aria-hidden="true"></span>
+  </section>
+  <section class="systems" id="systems" aria-label="Selected work">
+    <div class="wrap section-head"><p class="eyebrow">Selected work</p><p class="meta">Specifics generalized · Happy to demo</p></div>
+    <div id="rows"></div>
+  </section>
+  <section class="band wrap" id="experience" data-lens-size="0.55">
+    <p class="eyebrow">Experience</p>
+    <h2 class="heading">Where I've <b>led.</b></h2>
+    <ul class="xp">
+      <li><span class="when">Jul 2026 — Present</span><div><h3>HR Specialist</h3><span class="org">Netflix House · King of Prussia</span></div><p>People operations for a first-of-its-kind experiential venue: onboarding, employee relations, and day-to-day HR for a brand-new team.</p></li>
+      <li><span class="when">Jun 2024 — Jul 2026</span><div><h3>People Operations Manager</h3><span class="org">Walmart</span></div><p>Led 50+ associates across five departments. Acting Site Manager for 8 months. Built a leadership bootcamp that promoted 3 Team Leads and cut regional fill time 50%. Zero lost-time incidents.</p></li>
+      <li><span class="when">Jan 2021 — Jun 2024</span><div><h3>HR Business Partner II</h3><span class="org">Amazon · Philadelphia Region</span></div><p>People partner for 500+ associates across final-mile. Twice selected for the ER Jump Team. GDS Amazon Excellence Award (2024).</p></li>
+      <li><span class="when">Dec 2019 — Jan 2021</span><div><h3>Operations Manager</h3><span class="org">Amazon · Fulfillment</span></div><p>Managed 300+ associates across multi-shift fulfillment and supported six delivery station launches.</p></li>
+      <li><span class="when">Earlier</span><div><h3>Operations Leadership</h3><span class="org">FedEx · Greater Philadelphia</span></div><p>Foundational team leadership in high-volume delivery operations.</p></li>
+    </ul>
+  </section>
+  <section class="band wrap" id="stack" data-lens-size="0.55">
+    <p class="eyebrow">Stack &amp; credentials</p>
+    <h2 class="heading">Tools of the <b>trade.</b></h2>
+    <div class="grid2">
+      <div><h3 class="sub">Build stack</h3><ul class="chips"><li>Python</li><li>FastAPI</li><li>HTMX</li><li>JavaScript</li><li>SQLite</li><li>IndexedDB</li><li>WebRTC</li><li>PowerShell</li><li>.NET</li><li>AI agents</li><li>Self-hosted AI</li><li>Git</li></ul></div>
+      <div><h3 class="sub">Human stack</h3><ul class="chips"><li>Team development</li><li>Labor planning</li><li>Workforce analytics</li><li>Employee relations</li><li>Standard work</li><li>Safety culture</li><li>Lean / Six Sigma</li><li>Change management</li></ul></div>
+    </div>
+    <div class="certs">
+      <div><b>AI</b><h4>AI Fluency</h4><p>Anthropic Academy · 2026</p></div>
+      <div><b>PHR</b><h4>Professional in HR</h4><p>HRCI · 2023</p></div>
+      <div><b>6σ</b><h4>Six Sigma Yellow Belt</h4><p>2024</p></div>
+      <div><b>ML</b><h4>Machine Learning Spec.</h4><p>Stanford · In progress</p></div>
+    </div>
+  </section>
 </main>
-
+<footer class="foot wrap" id="contact" data-lens-size="0.55">
+  <p class="eyebrow">Get in touch</p>
+  <p class="foot-big">Let's build the<br><b>next thing.</b></p>
+  <div class="contact">
+    <a href="mailto:schramm.al@outlook.com">schramm.al@outlook.com</a>
+    <a href="https://linkedin.com/in/alschr">LinkedIn ↗</a>
+    <a href="https://github.com/schrammal">GitHub ↗</a>
+  </div>
+  <div class="foot-line">
+    <p class="meta">Designed &amp; built from scratch · © 2026 Al Schramm</p>
+    <p class="meta">Greater Philadelphia</p>
+  </div>
+</footer>
 <script>
-(function(){
-  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // mobile nav
-  var burger=document.getElementById('burger'),mnav=document.getElementById('mnav'),
-      scrim=document.getElementById('scrim'),mclose=document.getElementById('mclose');
-  function openM(){mnav.classList.add('open');scrim.classList.add('open');burger.setAttribute('aria-expanded','true');}
-  function closeM(){mnav.classList.remove('open');scrim.classList.remove('open');burger.setAttribute('aria-expanded','false');}
-  burger.addEventListener('click',openM);mclose.addEventListener('click',closeM);scrim.addEventListener('click',closeM);
-  mnav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeM);});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeM();});
-  // reveal on scroll
-  var revs=[].slice.call(document.querySelectorAll('.rev'));
-  if(rm){revs.forEach(function(r){r.classList.add('in');});}
-  else{
-    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12});
-    revs.forEach(function(r){io.observe(r);});
+const APPS = [
+  { id:'pipeline', n:'01', title:'Project Pipeline\nDashboard', type:'Ops tooling', outcome:'42 sites, one source of truth.',
+    desc:'Turns a sprawling planning spreadsheet into a fast, filterable source of truth: go-live dates, execution status, contacts. Atomic JSON snapshots with one-click rollback.',
+    tags:['Python','FastAPI','HTMX'], trust:'Live app + static build', demo:'#contact', cover:'', tint:'#5CE1FF' },
+  { id:'shipflow', n:'02', title:'Order-to-Label\nAutomation', type:'End-to-end automation', outcome:'Purchase order in, shipping label out. No retyping.',
+    desc:'Watches a procurement portal for new orders, builds the shipment, buys the label through the carrier API and prints a 4×6 label and packing slip, with review gates and a hold queue for anything unusual.',
+    tags:['Python','Carrier API','Browser automation','CUPS'], trust:'Running in production · Details generalized', demo:'#contact', cover:'', tint:'#8B7CFF' },
+  { id:'audit', n:'03', title:'Field Quality\nAudit App', type:'Browser app', outcome:'Zero installs, rolled out org-wide.',
+    desc:'Browser-only auditing: SSO identity, webcam capture, in-browser compression, and a draft email a human reviews before sending.',
+    tags:['Vanilla JS','IndexedDB','WebRTC'], trust:'Client-side only · Never auto-sends', demo:'#contact', cover:'', tint:'#5CE1FF' },
+  { id:'relay', n:'04', title:'Autonomous\nAgent Relay', type:'AI · Agents', outcome:'Two AI agents, two machines, one shared job.',
+    desc:'Lets two AI coding agents on separate machines coordinate shared work: file-drop mailbox, presence pings, and resume/handoff that survives restarts.',
+    tags:['Python','Agents','IPC'], trust:'Self-hosted AI playground', demo:'#contact', cover:'', tint:'#8B7CFF' },
+  { id:'command', n:'05', title:'AI Operations\nCommand Center', type:'Freelance · AI', outcome:'A small business, run from one screen.',
+    desc:'Turnkey ops platform for a small-business client: public site, quote intake with lead-time guardrails, PO-ready invoicing, and AI-assisted customer service.',
+    tags:['FastAPI','AI integration','Invoicing'], trust:'Delivered to client', demo:'#contact', cover:'', tint:'#5CE1FF' },
+  { id:'people', n:'06', title:'Attendance Feedback\nCompanion', type:'HR tooling', outcome:'Fair, consistent feedback in minutes.',
+    desc:'A Chromebook-friendly companion for HR: pulls attendance from Google Sheets, guides the conversation, and drafts one editable narrative ready for the HR system.',
+    tags:['Google Sheets','Apps Script','HR'], trust:'Built for the floor · No new software', demo:'#contact', cover:'', tint:'#8B7CFF' },
+];
+const FEATURED = 'pipeline';
+const LENS = {
+  size: 0.3, sizeSnapped: 1.12, sizeSnappedMobile: 1.08,
+  lead: 0.04, trail: 0.06, leadSnapped: 0.17, trailSnapped: 0.13, sizeLerp: 0.045,
+  blend: 0.8,
+  distortFreq: 1.9, distortStrength: 1.4,
+  dispFreq: 0.17, dispStrength: 0.02, dispScale: 0.7,
+  speed: 0.26, refraction: 0.035, chroma: 0.95,
+  fresnelPower: 1.3, rim: 1.1,
+  coverFade: 0.5, coverSettle: 2.0, maxDpr: 0.9, lowDpr: 0.5,
+};
+</script>
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const isNarrow = () => innerWidth <= 900;
+
+/* ---------- content render ---------- */
+$('#rows').innerHTML = APPS.map((a, i) => `
+  <article class="row wrap${i % 2 ? ' flip' : ''}" id="app-${esc(a.id)}" data-snap data-i="${i}">
+    <div class="copy">
+      <p class="index">${esc(a.n)} · ${esc(a.type)}</p>
+      <h2 class="title">${a.title.split('\n').map(esc).join('<br>')}</h2>
+      <p class="sub">${esc(a.outcome)}</p>
+      <p class="lead">${esc(a.desc)}</p>
+      <ul class="tags">${a.tags.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
+      <a class="ghost" href="${esc(a.demo)}">Ask me for a demo ↗</a>
+      <p class="meta">${esc(a.trust)}</p>
+    </div>
+    <div class="slot" aria-hidden="true"><span class="snap-point" data-snap-point></span><div class="fallback"></div></div>
+  </article>`).join('');
+const feat = APPS.find(a => a.id === FEATURED) || APPS[0];
+$('#featured-link').href = feat.demo;
+$('#count-line').textContent = `${APPS.length} builds shown · Greater Philadelphia`;
+
+/* ---------- menu ---------- */
+const menu = $('#menu'), burger = $('.burger');
+const setMenu = open => {
+  menu.hidden = !open; burger.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
+  (open ? $('nav a', menu) : burger).focus();
+  window.dispatchEvent(new CustomEvent('menu', { detail: open }));
+};
+burger.addEventListener('click', () => setMenu(true));
+$('.close', menu).addEventListener('click', () => setMenu(false));
+$$('nav a', menu).forEach(a => a.addEventListener('click', () => setMenu(false)));
+addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) setMenu(false); });
+
+/* ---------- wrap every word so the lens can mirror text at its exact on-screen position ---------- */
+function wrapWords(root) {
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => n.nodeValue.trim() && !n.parentElement.closest('script,style,.fallback') ? 1 : 2 });
+  const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+  for (const n of nodes) {
+    const f = document.createDocumentFragment();
+    for (const part of n.nodeValue.split(/(\s+)/)) {
+      if (!part) continue;
+      if (/^\s+$/.test(part)) { f.append(part); continue; }
+      const s = document.createElement('span'); s.className = 'lw'; s.textContent = part; f.append(s);
+    }
+    n.replaceWith(f);
   }
-  // count-up stats
-  var stats=[].slice.call(document.querySelectorAll('.st-n'));
-  function countUp(el){
-    var n=+el.getAttribute('data-n'),sup=el.querySelector('sup'),suf=sup?sup.outerHTML:'',dur=1100,t0=null;
-    if(rm){el.innerHTML=n+suf;return;}
-    function step(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1),v=Math.round(n*(1-Math.pow(1-p,3)));el.innerHTML=v+suf;if(p<1)requestAnimationFrame(step);}
-    requestAnimationFrame(step);
+}
+wrapWords($('main')); wrapWords($('footer'));
+
+/* ---------- placeholder covers (square, circle-safe composition) ---------- */
+function drawCover(a) {
+  const S = 1200, c = document.createElement('canvas'); c.width = c.height = S;
+  const x = c.getContext('2d'), F = getComputedStyle(document.body).fontFamily, M = "'JetBrains Mono',monospace";
+  const T = a.tint, fg = '#EAF2FF', mute = '#7C8BB3', card = '#111C44', card2 = '#18265A', line = 'rgba(120,180,255,.25)';
+  x.fillStyle = '#0A1230'; x.fillRect(0, 0, S, S);
+  const g = x.createRadialGradient(600, 420, 20, 600, 600, 700); g.addColorStop(0, T + '55'); g.addColorStop(1, T + '00');
+  x.fillStyle = g; x.fillRect(0, 0, S, S);
+  x.strokeStyle = 'rgba(120,180,255,.06)'; x.lineWidth = 1;
+  for (let i = 0; i <= S; i += 60) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i, S); x.moveTo(0, i); x.lineTo(S, i); x.stroke(); }
+  const R = (X, Y, W, H, r = 18, f = card, st = line) => { x.beginPath(); x.roundRect ? x.roundRect(X, Y, W, H, r) : x.rect(X, Y, W, H); if (f) { x.fillStyle = f; x.fill(); } if (st) { x.strokeStyle = st; x.lineWidth = 2; x.stroke(); } };
+  const t = (s, X, Y, sz, col = fg, w = 400, fam = F, al = 'left') => { x.textAlign = al; x.fillStyle = col; x.font = `${w} ${sz}px ${fam}`; x.fillText(s, X, Y); };
+  const dot = (X, Y, r, col) => { x.beginPath(); x.arc(X, Y, r, 0, 7); x.fillStyle = col; x.fill(); };
+  t(a.type.toUpperCase(), 600, 215, 22, T, 400, M, 'center');
+  const id = a.id;
+  if (id === 'pipeline') {
+    R(220, 260, 760, 620);
+    t('Go-live pipeline', 260, 320, 34, fg, 700);
+    t('Q4', 940, 320, 22, mute, 400, M, 'right');
+    const rows = [['Site 104', 60, 320, T], ['Site 211', 140, 260, '#8B7CFF'], ['Site 087', 230, 300, T], ['Site 330', 330, 200, '#5CE1FF'], ['Site 412', 400, 170, '#8B7CFF'], ['Site 158', 180, 380, T]];
+    rows.forEach(([n, s0, w, col], i) => { const y = 380 + i * 72; t(n, 260, y + 26, 22, mute, 400, M); R(420 + s0 * .9, y, w * .9, 36, 18, col + 'cc', null); });
+    x.fillStyle = '#ffffff'; x.fillRect(640, 360, 3, 450); t('TODAY', 641, 352, 16, fg, 400, M, 'center');
+    t('6 live · 3 at risk', 260, 850, 22, T, 400, M);
+  } else if (id === 'shipflow') {
+    R(170, 380, 250, 300); t('PO #48213', 190, 430, 22, T, 400, M);
+    [470, 510, 550, 590].forEach((y, i) => R(190, y, 210 - i * 30, 16, 8, card2, null)); t('NEW ORDER', 190, 650, 18, mute, 400, M);
+    x.strokeStyle = T; x.lineWidth = 4; [[430, 530, 480], [720, 530, 770]].forEach(([a0, y, b0]) => { x.beginPath(); x.moveTo(a0, y); x.lineTo(b0, y); x.lineTo(b0 - 14, y - 12); x.moveTo(b0, y); x.lineTo(b0 - 14, y + 12); x.stroke(); });
+    R(490, 300, 220, 400, 10, '#F4F7FF', null);
+    x.fillStyle = '#0A1230'; t('2DAY', 510, 355, 36, '#0A1230', 700); x.fillRect(510, 375, 180, 3);
+    for (let i = 0; i < 44; i++) { const w = [3, 5, 2, 7][i % 4]; x.fillStyle = '#0A1230'; x.fillRect(512 + i * 4, 400, w > 4 ? 3 : 2, 90); }
+    [520, 550, 580, 610].forEach((y, i) => { x.fillStyle = '#9AA6C6'; x.fillRect(510, y, 170 - i * 25, 12); });
+    t('4 × 6', 600, 680, 20, '#56638A', 400, M, 'center');
+    dot(880, 530, 90, T + '33'); dot(880, 530, 62, T);
+    x.strokeStyle = '#0A1230'; x.lineWidth = 12; x.beginPath(); x.moveTo(850, 532); x.lineTo(872, 556); x.lineTo(912, 506); x.stroke();
+    t('PRINTED', 880, 660, 22, fg, 400, M, 'center');
+    t('order → label → printer', 600, 840, 26, mute, 400, M, 'center');
+  } else if (id === 'audit') {
+    R(400, 250, 400, 720, 48, card);
+    R(430, 300, 340, 250, 22, card2, null); dot(600, 425, 60, T + '44'); x.strokeStyle = T; x.lineWidth = 3; x.strokeRect(540, 380, 120, 90);
+    t('● REC', 450, 335, 18, '#FF6B8B', 400, M);
+    [[430, 570], [545, 570], [660, 570]].forEach(([X, Y], i) => R(X, Y, 110, 90, 12, i === 1 ? T + '55' : card2, null));
+    t('Bay 7 · Section C', 430, 710, 24, fg, 700); t('2 issues noted', 430, 745, 20, mute, 400, M);
+    R(430, 780, 340, 70, 35, T, null); t('Review draft email', 600, 824, 24, '#0A1230', 700, F, 'center');
+  } else if (id === 'relay') {
+    const pane = (X, name, lines, col) => { R(X, 300, 400, 560, 16, '#070D22'); dot(X + 30, 330, 8, '#FF6B8B'); dot(X + 55, 330, 8, '#FFD166'); dot(X + 80, 330, 8, '#5CF2A0'); t(name, X + 380, 337, 18, mute, 400, M, 'right');
+      lines.forEach(([s, c2], i) => t(s, X + 26, 400 + i * 46, 21, c2 || col, 400, M)); };
+    pane(170, 'agent-a', [['$ claim task #12'], ['✓ lock acquired', '#5CF2A0'], ['→ writing patch'], ['→ tests pass', '#5CF2A0'], ['$ handoff → b'], ['… waiting'], ['● online', T]], fg);
+    pane(630, 'agent-b', [['● online', T], ['← handoff #12'], ['$ review patch'], ['✓ approved', '#5CF2A0'], ['$ merge'], ['✓ done', '#5CF2A0'], ['$ ping a']], fg);
+    x.strokeStyle = T; x.lineWidth = 4; x.setLineDash([12, 10]); x.beginPath(); x.moveTo(570, 600); x.lineTo(630, 600); x.stroke(); x.setLineDash([]);
+  } else if (id === 'command') {
+    R(220, 260, 760, 640); t('New quote', 260, 320, 34, fg, 700); t('#Q-0193', 940, 320, 20, mute, 400, M, 'right');
+    [['Customer', 'Acme Lab Supply'], ['Item', 'Custom fixture × 40'], ['Needed by', 'Oct 3']].forEach(([k, v], i) => { const y = 360 + i * 105; t(k.toUpperCase(), 260, y + 20, 16, mute, 400, M); R(260, y + 32, 680, 54, 12, card2, null); t(v, 282, y + 68, 24, fg); });
+    R(260, 690, 680, 80, 14, '#FFD16622', '#FFD166'); t('⚠ Lead time is 10 days. Earliest ship: Oct 9', 285, 740, 22, '#FFD166', 400, M);
+    R(700, 800, 240, 60, 30, T, null); t('Send to review', 820, 838, 22, '#0A1230', 700, F, 'center');
+    t('AI draft ready', 260, 838, 20, T, 400, M);
+  } else if (id === 'people') {
+    R(170, 290, 400, 600); t('Attendance', 200, 345, 30, fg, 700); t('LAST 90 DAYS', 200, 380, 16, mute, 400, M);
+    for (let w = 0; w < 6; w++) for (let d = 0; d < 7; d++) { const k = (w * 7 + d) % 11; R(200 + d * 48, 410 + w * 48, 38, 38, 8, k === 3 ? '#FF6B8B' : k === 8 ? '#FFD166' : T + '66', null); }
+    t('2 tardies · 1 absence', 200, 740, 20, fg, 400, M); t('Within policy', 200, 780, 20, '#5CF2A0', 400, M);
+    R(620, 290, 410, 600, 18, '#F4F7FF', null); t('Feedback draft', 650, 345, 28, '#0A1230', 700);
+    [400, 440, 480, 520, 580, 620, 660, 720, 760].forEach((y, i) => { x.fillStyle = '#B8C2DD'; x.fillRect(650, y, [340, 320, 350, 210, 340, 300, 330, 260, 180][i], 12); });
+    R(650, 810, 200, 50, 25, '#8B7CFF', null); t('Edit & copy', 750, 843, 20, '#fff', 700, F, 'center');
   }
-  var sio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){countUp(en.target);sio.unobserve(en.target);}});},{threshold:.5});
-  stats.forEach(function(s){sio.observe(s);});
-  // ---- delight: custom cursor + warm spotlight + magnetic + tilt (fine pointer & motion-OK only) ----
-  var fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
-  if(!rm && fine){
-    var dot=document.getElementById('cdot'),ring=document.getElementById('cring'),root=document.documentElement;
-    document.body.classList.add('cursor-on');
-    var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
-    addEventListener('pointermove',function(e){
-      mx=e.clientX;my=e.clientY;
-      dot.style.transform='translate('+mx+'px,'+my+'px) translate(-50%,-50%)';
-      root.style.setProperty('--mx',mx+'px');root.style.setProperty('--my',my+'px');
-    },{passive:true});
-    (function loop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;ring.style.transform='translate('+rx+'px,'+ry+'px) translate(-50%,-50%)';requestAnimationFrame(loop);})();
-    document.querySelectorAll('a,button,.proj,.cert,.snap,.st').forEach(function(el){
-      el.addEventListener('mouseenter',function(){document.body.classList.add('hovering');});
-      el.addEventListener('mouseleave',function(){document.body.classList.remove('hovering');});
-    });
-    document.querySelectorAll('.btn').forEach(function(b){
-      b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.25+'px,'+(e.clientY-r.top-r.height/2)*.35+'px)';});
-      b.addEventListener('pointerleave',function(){b.style.transform='';});
-    });
-    document.querySelectorAll('.proj').forEach(function(c){
-      c.addEventListener('pointermove',function(e){var r=c.getBoundingClientRect();var px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(900px) rotateY('+px*4+'deg) rotateX('+(-py*4)+'deg) translateY(-3px)';});
-      c.addEventListener('pointerleave',function(){c.style.transform='';});
-    });
+  t('Illustrative mock · sample data', 600, 990, 18, mute, 400, M, 'center');
+  return c;
+}
+
+/* ---------- WebGL lens ---------- */
+const VERT = `attribute vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }`;
+const FRAG = `
+precision highp float;
+uniform vec2 uRes; uniform vec2 uA; uniform float uTime;
+uniform vec2 uP1; uniform vec2 uP2; uniform float uSize; uniform float uK;
+uniform sampler2D tPage; uniform sampler2D tCoverA; uniform sampler2D tCoverB;
+uniform float uCover; uniform float uCoverMix; uniform float uCoverScale; uniform float uAspA; uniform float uAspB;
+uniform float uDF; uniform float uDS; uniform float uPF; uniform float uPS; uniform float uPSc;
+uniform float uRefr; uniform float uChroma; uniform float uFP; uniform float uRim; uniform float uDebug;
+vec3 C1; vec3 C2;
+
+vec3 hash3(vec3 p){ p = fract(p * vec3(.1031, .1030, .0973)); p += dot(p, p.yxz + 33.33); return fract((p.xxy + p.yxx) * p.zyx) * 2. - 1.; }
+float gnoise(vec3 p){
+  vec3 i = floor(p), f = fract(p), u = f * f * (3. - 2. * f);
+  return 2.2 * mix(mix(mix(dot(hash3(i), f), dot(hash3(i + vec3(1,0,0)), f - vec3(1,0,0)), u.x),
+                       mix(dot(hash3(i + vec3(0,1,0)), f - vec3(0,1,0)), dot(hash3(i + vec3(1,1,0)), f - vec3(1,1,0)), u.x), u.y),
+                   mix(mix(dot(hash3(i + vec3(0,0,1)), f - vec3(0,0,1)), dot(hash3(i + vec3(1,0,1)), f - vec3(1,0,1)), u.x),
+                       mix(dot(hash3(i + vec3(0,1,1)), f - vec3(0,1,1)), dot(hash3(i + vec3(1,1,1)), f - vec3(1,1,1)), u.x), u.y), u.z);
+}
+float smin(float a, float b, float k){ float h = clamp(.5 + .5 * (b - a) / k, 0., 1.); return mix(b, a, h) - k * h * (1. - h); }
+// Two spheres (lead is slightly smaller) melted together -> liquid stretch when moving
+float sdf(vec3 p){ return smin(length(p - C1) - uSize * .836, length(p - C2) - uSize, uSize * uK); }
+// Noise displacement relative to the blob center so the wobble is identical anywhere on screen
+vec3 displace(vec3 p){
+  vec3 l = p - C1;
+  vec3 q = l + gnoise(l * (uDF / uPSc) * uDS + uTime);
+  float n = gnoise(q * (uPF / uPSc) * uDS);
+  return p + l * .5 * n * uPS * 4.;
+}
+vec3 normalAt(vec3 p){ vec2 e = vec2(.01, 0.); return normalize(vec3(
+  sdf(p + e.xyy) - sdf(p - e.xyy), sdf(p + e.yxy) - sdf(p - e.yxy), sdf(p + e.yyx) - sdf(p - e.yyx))); }
+vec3 cover(sampler2D s, vec2 c, float asp){ if (asp >= 1.) c.x = .5 + (c.x - .5) / asp; else c.y = .5 + (c.y - .5) * asp; return texture2D(s, c).rgb; }
+
+void main(){
+  vec2 uv = gl_FragCoord.xy / uRes;
+  if (uDebug > .5) { gl_FragColor = vec4(texture2D(tPage, uv).r, 0., 0., .75); return; }
+  C1 = vec3(uP1 * uA * 2., 0.); C2 = vec3(uP2 * uA * 2., 0.);
+  vec2 P = 2. * (uv - .5) * uA;                                  // this pixel on the z=0 plane
+  if (min(length(P - C1.xy), length(P - C2.xy)) > uSize * 1.5) { gl_FragColor = vec4(0.); return; }  // cheap early-out
+
+  vec3 ro = vec3(0., 0., 2.);
+  vec3 rd = normalize(vec3((uv - .5) * uA, -1.));
+  float t = 0., h = 1., mh = 1.;
+  for (int i = 0; i < 48; i++) { h = sdf(displace(ro + t * rd)); mh = min(mh, h); if (h < .001 || t > 3.) break; t += h * .8; }
+
+  if (h >= .001) {                                               // miss: ~1px bright anti-aliased edge, else transparent
+    float px = 2. * uA.x / uRes.x;
+    gl_FragColor = vec4(1., 1., 1., (1. - smoothstep(0., px * 1.5, mh)) * .9 * uRim);
+    return;
   }
+  vec3 p = ro + t * rd;
+  vec3 n0 = normalAt(p);                                         // normal of the DISPLACED surface (tangent trick)
+  vec3 t1 = normalize(abs(n0.x) > abs(n0.z) ? vec3(-n0.y, n0.x, 0.) : vec3(0., -n0.z, n0.y));
+  vec3 t2 = normalize(cross(n0, t1));
+  vec3 d0 = displace(p), d1 = displace(p + t1 * .005), d2 = displace(p + t2 * .005);
+  vec3 n = normalize(cross(d1 - d0, d2 - d0)); if (dot(n, n0) < 0.) n = -n;
+
+  vec3 rf = refract(vec3(0., 0., -1.), n, .5);                   // bend what's behind
+  vec2 ruv = uv + rf.xy * uRefr;
+  float off = (.0015 * n.x + .002) * uChroma;                    // chromatic split
+  vec3 page = vec3(texture2D(tPage, ruv + vec2(0., off)).r, texture2D(tPage, ruv).g, texture2D(tPage, ruv - vec2(0., off)).b);
+
+  vec2 q = (2. * (ruv - .5) * uA - C1.xy) / uSize;               // -1..1 across the lens
+  vec2 cuv = .5 + q * .5 * .94 / uCoverScale;
+  vec3 img = mix(cover(tCoverA, cuv, uAspA), cover(tCoverB, cuv, uAspB), uCoverMix);
+  vec3 behind = mix(page, img, uCover * (1. - smoothstep(.82, 1.08, length(q))));
+
+  float fr = pow(clamp(1. + dot(rd, n), 0., 1.), uFP * 2.);      // fresnel: 0 center -> 1 edge
+  behind *= 1. - .25 * fr;
+  vec3 irid = .5 + .5 * cos(6.2831 * (fr * .8 + vec3(0., .33, .67)) + uTime * .3);
+  vec3 rim = mix(vec3(.62,.93,1.), irid, .18) * pow(smoothstep(.45, 1., fr), 2.) * uRim;   // thin, mostly-white edge light
+  gl_FragColor = vec4(1. - (1. - behind) * (1. - rim), 1.);      // screen blend
+}`;
+
+function initLens(covers) {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'lens'; canvas.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(canvas);
+  let gl = null;
+  try { gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false, antialias: false, depth: false, stencil: false, powerPreference: 'high-performance' }); } catch (e) {}
+  const fail = msg => { console.warn('[lens] WebGL unavailable, using static fallback:', msg); canvas.remove(); return false; };
+  if (!gl) return fail('no context');
+
+  const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error(gl.getShaderInfoLog(s)); return null; } return s; };
+  const vs = sh(gl.VERTEX_SHADER, VERT), fs = sh(gl.FRAGMENT_SHADER, FRAG);
+  if (!vs || !fs) return fail('shader compile');
+  const prog = gl.createProgram(); gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return fail(gl.getProgramInfoLog(prog));
+  gl.useProgram(prog);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  const aPos = gl.getAttribLocation(prog, 'aPos'); gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+  const U = {};
+  for (const n of ['uRes','uA','uTime','uP1','uP2','uSize','uK','tPage','tCoverA','tCoverB','uCover','uCoverMix','uCoverScale','uAspA','uAspB',
+    'uDF','uDS','uPF','uPS','uPSc','uRefr','uChroma','uFP','uRim','uDebug']) U[n] = gl.getUniformLocation(prog, n);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+  const makeTex = src => { const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+    for (const [k, v] of [[gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE], [gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE], [gl.TEXTURE_MIN_FILTER, gl.LINEAR], [gl.TEXTURE_MAG_FILTER, gl.LINEAR]]) gl.texParameteri(gl.TEXTURE_2D, k, v);
+    if (src) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, src); return t; };
+  const pageTex = makeTex(null);
+  const coverTex = covers.map(makeTex), coverAsp = covers.map(c => c.width / c.height);
+  APPS.forEach((a, i) => {                                       // swap in real screenshots when provided
+    if (!a.cover) return;
+    const img = new Image(); img.crossOrigin = 'anonymous';
+    img.onload = () => { gl.bindTexture(gl.TEXTURE_2D, coverTex[i]); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img); coverAsp[i] = img.naturalWidth / img.naturalHeight; };
+    img.onerror = () => console.warn('[lens] cover failed to load (check path/CORS):', a.cover);
+    img.src = a.cover;
+  });
+  gl.uniform1i(U.tPage, 0); gl.uniform1i(U.tCoverA, 1); gl.uniform1i(U.tCoverB, 2);
+  const debug = new URLSearchParams(location.search).has('lensdebug');
+
+  /* page mirror: every word + hairline box, cached in document coordinates */
+  const page = document.createElement('canvas'), pctx = page.getContext('2d');
+  const mctx = document.createElement('canvas').getContext('2d');
+  let words = [], boxes = [], needCache = true, pageDirty = true, lastScroll = -1;
+  function cacheLayout() {
+    const sy = scrollY; words = []; boxes = [];
+    for (const s of $$('.lw')) {
+      const r = s.getBoundingClientRect(); if (!r.width) continue;
+      const cs = getComputedStyle(s);
+      if (cs.visibility === 'hidden' || s.closest('[hidden]')) continue;
+      const font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      let text = s.textContent; if (cs.textTransform === 'uppercase') text = text.toUpperCase();
+      mctx.font = font; const m = mctx.measureText(text);
+      const fs = parseFloat(cs.fontSize);
+      const asc = m.fontBoundingBoxAscent ?? fs * .8, dsc = m.fontBoundingBoxDescent ?? fs * .2;
+      words.push({ text, font, x: r.left, y: r.top + sy + (r.height - (asc + dsc)) / 2 + asc, top: r.top + sy, h: r.height,
+        color: cs.color, ls: cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing });
+    }
+    for (const el of $$('.tags li, .checks li, .section-head, .foot-line')) {
+      const r = el.getBoundingClientRect(), cs = getComputedStyle(el);
+      boxes.push({ x: r.left, y: r.top + sy, w: r.width, h: r.height, c: cs.borderTopColor,
+        bt: parseFloat(cs.borderTopWidth) || 0, bb: parseFloat(cs.borderBottomWidth) || 0, bl: parseFloat(cs.borderLeftWidth) || 0,
+        rad: Math.min(parseFloat(cs.borderTopLeftRadius) || 0, r.height / 2) });
+    }
+    needCache = false; pageDirty = true;
+  }
+  function drawPage() {
+    const w = innerWidth, h = innerHeight, sy = scrollY;
+    if (page.width !== w || page.height !== h) { page.width = w; page.height = h; }
+    pctx.setTransform(1, 0, 0, 1, 0, 0); pctx.fillStyle = '#060A18'; pctx.fillRect(0, 0, w, h);
+    pctx.lineWidth = 1;
+    for (const b of boxes) {
+      const y = b.y - sy; if (y > h || y + b.h < 0) continue;
+      pctx.strokeStyle = b.c;
+      if (b.bl && b.bt) { pctx.beginPath(); pctx.roundRect ? pctx.roundRect(b.x + .5, y + .5, b.w - 1, b.h - 1, b.rad) : pctx.rect(b.x + .5, y + .5, b.w - 1, b.h - 1); pctx.stroke(); }
+      else { if (b.bt) pctx.strokeRect(b.x, y + .5, b.w, 0); if (b.bb) pctx.strokeRect(b.x, y + b.h - .5, b.w, 0); }
+    }
+    pctx.textBaseline = 'alphabetic'; pctx.textAlign = 'left';
+    let f = '', c = '', l = '';
+    for (const t of words) {
+      const y = t.top - sy; if (y > h + 40 || y + t.h < -40) continue;
+      if (t.font !== f) pctx.font = f = t.font;
+      if (t.color !== c) pctx.fillStyle = c = t.color;
+      if (t.ls !== l) { l = t.ls; if ('letterSpacing' in pctx) pctx.letterSpacing = l; }
+      pctx.fillText(t.text, t.x, t.y - sy);
+    }
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, pageTex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, page);
+    pageDirty = false;
+  }
+
+  /* sizing */
+  let dpr = Math.min(devicePixelRatio || 1, LENS.maxDpr), A = [1, 1];
+  function resize() {
+    canvas.width = Math.max(1, Math.round(innerWidth * dpr)); canvas.height = Math.max(1, Math.round(innerHeight * dpr));
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    const a = innerHeight / innerWidth; A = a > 1 ? [1 / a, 1] : [1, a];
+    needCache = true;
+  }
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 80); });
+  new ResizeObserver(() => { needCache = true; }).observe(document.body);
+  resize();
+  const baseSize = () => Math.min(Math.max(innerWidth, 800), 2000) / Math.max(innerWidth, 1000) * LENS.size;
+
+  /* motion state */
+  const norm = (x, y) => [x / innerWidth - .5, .5 - y / innerHeight];
+  const center = el => { const r = el.getBoundingClientRect(); return norm(r.left + r.width / 2, r.top + r.height / 2); };
+  let mouse = null;
+  if (finePointer) addEventListener('pointermove', e => { if (e.pointerType === 'mouse') mouse = norm(e.clientX, e.clientY); }, { passive: true });
+  const rest = $('[data-rest-point]');
+  let target = center(rest), p1 = target.slice(), p2 = target.slice();
+  const S = { size: baseSize(), cover: 0, coverMix: 0, coverScale: 1 };
+  let slotA = 0, slotB = 0, snapped = null, menuOpen = false;
+  addEventListener('menu', e => { menuOpen = e.detail; canvas.classList.toggle('on', !menuOpen); });
+
+  /* tiny tween engine (expo.out like GSAP) */
+  const tweens = new Map();
+  const expoOut = k => k >= 1 ? 1 : 1 - Math.pow(2, -10 * k), linear = k => k;
+  const tween = (key, to, dur, ease = expoOut, done) => tweens.set(key, { from: S[key], to, dur: Math.max(dur, 1e-3), t: 0, ease, done });
+  const stepTweens = dt => { for (const [k, tw] of tweens) { tw.t += dt; const e = Math.min(1, tw.t / tw.dur); S[k] = tw.from + (tw.to - tw.from) * tw.ease(e); if (e >= 1) { tweens.delete(k); tw.done && tw.done(); } } };
+
+  function onSnapChange(row) {
+    if (!row) { tween('cover', 0, LENS.coverFade, linear); return; }
+    const i = +row.dataset.i;
+    if (S.cover < .02) { slotA = i; S.coverMix = 0; tweens.delete('coverMix'); }
+    else { if (S.coverMix > .5) slotA = slotB; slotB = i; S.coverMix = 0;
+           tween('coverMix', 1, LENS.coverFade, linear, () => { slotA = slotB; S.coverMix = 0; }); }
+    tween('cover', 1, LENS.coverFade, linear);
+    S.coverScale = 1.35; tween('coverScale', 1, LENS.coverSettle);
+  }
+
+  /* a row is "active" only while it crosses the viewport's horizontal center line */
+  const active = new Set();
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? active.add(e.target) : active.delete(e.target)),
+    { rootMargin: '-50% 0% -50% 0%', threshold: 0 });
+  $$('[data-snap]').forEach(r => io.observe(r));
+  const sizeSections = $$('[data-lens-size]');
+
+  const speed = reduced ? 0 : LENS.speed;
+  let last = performance.now(), probe = 0, probeN = 0, time = 0;
+  const L = (a, b, f) => a + (b - a) * f;
+
+  function frame(now) {
+    const dt = Math.min(.05, Math.max(0, (now - last) / 1000)); last = now; time += dt;
+    const k = dt * 60, ease = f => 1 - Math.pow(1 - f, k);       // frame-rate independent lerp
+    if (probeN < 120) { probe += dt; if (++probeN === 120 && probe / 120 > 1 / 45 && dpr > LENS.lowDpr) { dpr = LENS.lowDpr; resize(); } }
+    stepTweens(dt);
+
+    const row = [...active].sort((a, b) => Math.abs(a.getBoundingClientRect().top + a.offsetHeight / 2 - innerHeight / 2) - Math.abs(b.getBoundingClientRect().top + b.offsetHeight / 2 - innerHeight / 2))[0] || null;
+    if (row !== snapped) { snapped = row; onSnapChange(row); }
+
+    if (snapped) target = center($('[data-snap-point]', snapped));
+    else if (mouse) target = mouse;
+    else { const r = rest.getBoundingClientRect(); target = r.bottom > 0 ? center(rest) : [0, 0]; }
+
+    const lead = snapped ? LENS.leadSnapped : LENS.lead, trail = snapped ? LENS.trailSnapped : LENS.trail;
+    p1[0] = L(p1[0], target[0], ease(lead)); p1[1] = L(p1[1], target[1], ease(lead));
+    p2[0] = L(p2[0], p1[0], ease(trail));   p2[1] = L(p2[1], p1[1], ease(trail));
+
+    let mult = snapped ? (isNarrow() ? LENS.sizeSnappedMobile : LENS.sizeSnapped) : 1;
+    for (const s of sizeSections) { const r = s.getBoundingClientRect(); if (r.top < innerHeight / 2 && r.bottom > innerHeight / 2) mult = parseFloat(s.dataset.lensSize) || 1; }
+    S.size = L(S.size, baseSize() * mult, ease(LENS.sizeLerp));
+
+    if (needCache) cacheLayout();
+    if (scrollY !== lastScroll) { lastScroll = scrollY; pageDirty = true; }
+    if (pageDirty) drawPage();
+
+    if (!menuOpen) {
+      gl.uniform2f(U.uRes, canvas.width, canvas.height); gl.uniform2f(U.uA, A[0], A[1]);
+      gl.uniform1f(U.uTime, time * speed);
+      gl.uniform2f(U.uP1, p1[0], p1[1]); gl.uniform2f(U.uP2, p2[0], p2[1]);
+      gl.uniform1f(U.uSize, S.size); gl.uniform1f(U.uK, LENS.blend);
+      gl.uniform1f(U.uCover, S.cover); gl.uniform1f(U.uCoverMix, S.coverMix); gl.uniform1f(U.uCoverScale, S.coverScale);
+      gl.uniform1f(U.uAspA, coverAsp[slotA]); gl.uniform1f(U.uAspB, coverAsp[slotB]);
+      gl.uniform1f(U.uDF, LENS.distortFreq); gl.uniform1f(U.uDS, LENS.distortStrength);
+      gl.uniform1f(U.uPF, LENS.dispFreq); gl.uniform1f(U.uPS, LENS.dispStrength); gl.uniform1f(U.uPSc, LENS.dispScale);
+      gl.uniform1f(U.uRefr, LENS.refraction); gl.uniform1f(U.uChroma, LENS.chroma); gl.uniform1f(U.uFP, LENS.fresnelPower);
+      gl.uniform1f(U.uRim, LENS.rim); gl.uniform1f(U.uDebug, debug ? 1 : 0);
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, coverTex[slotA]);
+      gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, coverTex[slotB]);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    window.__lens = { snapped: snapped && snapped.id, p1: p1.map(v => +v.toFixed(3)), target: target.map(v => +v.toFixed(3)),
+      size: +S.size.toFixed(3), cover: +S.cover.toFixed(2), coverSlot: APPS[slotA].id, dpr, words: words.length };
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(t => { last = t; canvas.classList.add('on'); frame(t); });
+  return true;
+}
+
+/* ---------- boot ---------- */
+Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 2500))]).then(() => {
+  const covers = APPS.map(drawCover);
+  $$('.fallback').forEach((el, i) => { el.style.backgroundImage = `url("${APPS[i].cover || covers[i].toDataURL('image/jpeg', .85)}")`; });
+  if (!initLens(covers)) document.documentElement.classList.add('no-webgl');
+});
 })();
 </script>
 </body>
