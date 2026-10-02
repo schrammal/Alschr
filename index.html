@@ -238,7 +238,7 @@ const LENS = {
   dispFreq: 0.17, dispStrength: 0.02, dispScale: 0.7,
   speed: 0.26, refraction: 0.035, chroma: 0.95,
   fresnelPower: 1.3, rim: 1.1,
-  coverFade: 0.5, coverSettle: 2.0, maxDpr: 0.9, lowDpr: 0.5,
+  coverFade: 0.5, coverSettle: 2.0, maxDpr: (innerWidth <= 900 ? 2 : 1.25), lowDpr: (innerWidth <= 900 ? 1.25 : 0.75),
 };
 </script>
 <script>
